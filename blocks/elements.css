@@ -1,7 +1,7 @@
 .elements {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 361px);
+  grid-template-rows: repeat(auto);
   gap: 21px 18px;
   margin-bottom: 67px;
 }
@@ -9,6 +9,7 @@
 .elements__card {
   background-color: #ffffff;
   border-radius: 10px;
+  height: 361px;
 }
 
 .elements__card__photo {
@@ -85,7 +86,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: auto 18px 31px 21px;
+  margin: auto 18px 0px 21px;
 }
 
 .elements__card__title {

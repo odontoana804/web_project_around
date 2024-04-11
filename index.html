@@ -36,8 +36,28 @@
             type="text"
             id="popup__about"
           />
-          <button class="popup___btn-cerrar" type="reset"></button>
-          <button class="popup__btn-guardar" type="submit">Guardar</button>
+          <button class="popup___btn-close" id="btn-close-profile" type="reset"></button>
+          <button class="popup__btn-submit" id="btn-submit-profile" type="submit">Guardar</button>
+        </form>
+      </dialog>
+
+      <dialog class="popup" id="popup__place">
+        <form method="dialog" class="popup__container">
+          <p class="popup__title">Nuevo lugar</p>
+          <input
+            class="popup__name"
+            placeholder="Título"
+            type="text"
+            id="popup__name-place"
+          />
+          <input
+            class="popup__about"
+            placeholder="Enlace a la imagen"
+            type="text"
+            id="popup__about-place"
+          />
+          <button class="popup___btn-close" id="btn-close-place" type="reset"></button>
+          <button class="popup__btn-submit" id="btn-submit-place" type="submit">Crear</button>
         </form>
       </dialog>
 
@@ -46,7 +66,7 @@
           <img src="./images/avatar.jpg" alt="avatar" class="profile__avatar" />
           <div class="profile__info">
             <div class="profile__info-container">
-              <p class="profile__name">Jacques Cousteau</p>
+              <h1 class="profile__name">Jacques Cousteau</h1>
               <button class="profile__edit-button"></button>
             </div>
             <p class="profile__description">Explorador</p>

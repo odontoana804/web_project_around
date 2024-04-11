@@ -1,14 +1,20 @@
-let editButton = document.querySelector(".profile__edit-button");
-let cancelButton = document.querySelector(".popup___btn-cerrar");
-let popupProfile = document.querySelector("#popup__profile");
-let confirmButton = document.querySelector(".popup__btn-guardar");
-let popupName = document.querySelector(".popup__name");
+let editButtonProfile = document.querySelector(".profile__edit-button");
 let profileName = document.querySelector(".profile__name");
-let popupAbout = document.querySelector(".popup__about");
 let profileDescription = document.querySelector(".profile__description");
+let popupProfile = document.querySelector("#popup__profile");
+let cancelButtonProfile = document.querySelector("#btn-close-profile");
+let confirmButtonProfile = document.querySelector("#btn-submit-profile");
+
+let popupName = document.querySelector(".popup__name");
+let popupAbout = document.querySelector(".popup__about");
 let popupOverlay = document.querySelector(".popup__overlay");
 
-function showPopUp() {
+let popupPlace = document.querySelector("#popup__place");
+let addButtonPlace = document.querySelector(".elements__add-button");
+let cancelButtonPlace = document.querySelector("#btn-close-place")
+let confirmButtonPlace = document.querySelector("#btn-submit-place")
+
+function showPopUpProfile() {
   popupProfile.classList.add("popup_opened");
   popupOverlay.classList.add("popup__overlay_opened");
   popupName.value = document.querySelector(".profile__name").textContent;
@@ -17,12 +23,12 @@ function showPopUp() {
   ).textContent;
 }
 
-function closePopUp() {
+function closePopUpProfile() {
   popupProfile.classList.remove("popup_opened");
   popupOverlay.classList.remove("popup__overlay_opened");
 }
 
-function confirmPopUp() {
+function confirmPopUpProfile() {
   profileName.innerHTML = popupName.value;
   if (popupName.value == "") {
     profileName.innerHTML = "Actualizar nombre";
@@ -31,11 +37,32 @@ function confirmPopUp() {
   if (popupAbout.value == "") {
     profileDescription.innerHTML = "Actualizar profesión";
   }
-  closePopUp();
+  closePopUpProfile();
 }
 
-editButton.addEventListener("click", showPopUp);
+function showPopUpPlace() {
+  popupPlace.classList.add("popup_opened");
+  popupOverlay.classList.add("popup__overlay_opened");
+}
 
-cancelButton.addEventListener("click", closePopUp);
+function closePopUpPlace() {
+  popupPlace.classList.remove("popup_opened");
+  popupOverlay.classList.remove("popup__overlay_opened");
+}
 
-confirmButton.addEventListener("click", confirmPopUp);
+function confirmPopUpPlace() {
+  closePopUpPlace();
+}
+
+
+editButtonProfile.addEventListener("click", showPopUpProfile);
+
+cancelButtonProfile.addEventListener("click", closePopUpProfile);
+
+confirmButtonProfile.addEventListener("click", confirmPopUpProfile);
+
+addButtonPlace.addEventListener("click", showPopUpPlace);
+
+cancelButtonPlace.addEventListener("click", closePopUpPlace);
+
+confirmButtonPlace.addEventListener("click", confirmPopUpPlace);
