@@ -1,0 +1,122 @@
+.elements {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 361px);
+  gap: 21px 18px;
+  margin-bottom: 67px;
+}
+
+.elements__card {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.elements__card__photo {
+  position: relative;
+  width: 100%;
+
+  background-position: center;
+  background-size: cover;
+  padding-bottom: 100%;
+  background-repeat: no-repeat;
+  margin: 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.elements__card__photo_estatua-libertad {
+  background-image: url("../images/estatua-de-la-libertad.jpg");
+}
+
+.elements__card__photo_golden-gate-bridge {
+  background-image: url("../images/Golden-Gate-Bridge.jpg");
+}
+
+.elements__card__photo_cataratas-del-niagara {
+  background-image: url("../images/Cataratas-del-niagara.jpg");
+}
+
+.elements__card__photo_monte-rushmore {
+  background-image: url("../images/monte-rushmore.jpg");
+}
+
+.elements__card__photo_space-neddle {
+  background-image: url("../images/space-neddle.jpg");
+}
+
+.elements__card__photo_empire-state-building {
+  background-image: url("../images/empire-state-building.jpg");
+}
+
+
+
+.elements__card__btn-hearth {
+  width: 21px;
+  height: 19px;
+  background-color: transparent;
+  background-image: url("../images/hearth-white.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  border: none;
+}
+
+.elements__card__btn-hearth:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.elements__card__btn-trash {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 18px;
+  height: 19.3px;
+  background-color: transparent;
+  background-image: url("../images/Trash.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+  border: none;
+  z-index: 1;
+}
+
+.elements__card__btn-trash:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.elements__card__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto 18px 31px 21px;
+}
+
+.elements__card__title {
+  max-width: 210px;
+  font-size: 24px;
+  font-weight: 900;
+  color: #000000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.elements__add-button {
+  width: 150px;
+  height: 50px;
+  box-sizing: border-box;
+  background-image: url("../images/add-button.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0;
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+}
+
+.elements__add-button:hover {
+  opacity: 0.6;
+}
