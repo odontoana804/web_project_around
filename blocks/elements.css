@@ -1,6 +1,6 @@
 .elements {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 282px);
   grid-template-rows: repeat(auto);
   gap: 21px 18px;
   margin-bottom: 67px;
@@ -15,7 +15,6 @@
 .elements__card__photo {
   position: relative;
   width: 100%;
-
   background-position: center;
   background-size: cover;
   padding-bottom: 100%;
@@ -64,6 +63,10 @@
   cursor: pointer;
 }
 
+.elements__card__btn-hearth_active {
+  background-image: url("../images/hearth-black.png");
+}
+
 .elements__card__btn-trash {
   position: absolute;
   top: 18px;
@@ -97,6 +100,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .elements__add-button {
@@ -115,4 +119,24 @@
 
 .elements__add-button:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 920px) {
+  .elements {
+    grid-template-columns: repeat(2, 282px);
+  }
+
+  .elements__add-button {
+    width: 100%;
+    grid-area: button;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .elements {
+    grid-template-columns: 282px;
+  }
+  .elements__add-button {
+    width: 282px;
+  }
 }

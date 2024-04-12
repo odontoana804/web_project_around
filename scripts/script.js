@@ -11,8 +11,8 @@ let popupOverlay = document.querySelector(".popup__overlay");
 
 let popupPlace = document.querySelector("#popup__place");
 let addButtonPlace = document.querySelector(".elements__add-button");
-let cancelButtonPlace = document.querySelector("#btn-close-place")
-let confirmButtonPlace = document.querySelector("#btn-submit-place")
+let cancelButtonPlace = document.querySelector("#btn-close-place");
+let confirmButtonPlace = document.querySelector("#btn-submit-place");
 
 function showPopUpProfile() {
   popupProfile.classList.add("popup_opened");
@@ -54,7 +54,6 @@ function confirmPopUpPlace() {
   closePopUpPlace();
 }
 
-
 editButtonProfile.addEventListener("click", showPopUpProfile);
 
 cancelButtonProfile.addEventListener("click", closePopUpProfile);
@@ -66,3 +65,15 @@ addButtonPlace.addEventListener("click", showPopUpPlace);
 cancelButtonPlace.addEventListener("click", closePopUpPlace);
 
 confirmButtonPlace.addEventListener("click", confirmPopUpPlace);
+
+//------------------------------------------------------------------
+// Intento de código para botón de Like
+// Solo funciona en la primera tarjeta
+
+let likeButton = document.querySelector(".elements__card__btn-hearth");
+
+function toggleLike() {
+  likeButton.classList.toggle("elements__card__btn-hearth_active");
+}
+
+likeButton.addEventListener("click", toggleLike);

@@ -3,6 +3,9 @@ body {
 }
 
 .page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 1280px;
   margin: auto;
   font-family: "Inter", Arial, sans-serif;
