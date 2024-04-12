@@ -19,14 +19,72 @@
           class="header__logo"
         />
       </header>
+
+      <div class="popup__overlay"></div>
+      <dialog class="popup" id="popup__profile">
+        <form method="dialog" class="popup__container">
+          <p class="popup__title">Editar Perfil</p>
+          <input
+            class="popup__name"
+            placeholder="Nombre"
+            type="text"
+            id="popup__name"
+          />
+          <input
+            class="popup__about"
+            placeholder="Acerca de mí"
+            type="text"
+            id="popup__about"
+          />
+          <button
+            class="popup___btn-close"
+            id="btn-close-profile"
+            type="reset"
+          ></button>
+          <button
+            class="popup__btn-submit"
+            id="btn-submit-profile"
+            type="submit"
+          >
+            Guardar
+          </button>
+        </form>
+      </dialog>
+
+      <dialog class="popup" id="popup__place">
+        <form method="dialog" class="popup__container">
+          <p class="popup__title">Nuevo lugar</p>
+          <input
+            class="popup__name"
+            placeholder="Título"
+            type="text"
+            id="popup__name-place"
+          />
+          <input
+            class="popup__about"
+            placeholder="Enlace a la imagen"
+            type="text"
+            id="popup__about-place"
+          />
+          <button
+            class="popup___btn-close"
+            id="btn-close-place"
+            type="reset"
+          ></button>
+          <button class="popup__btn-submit" id="btn-submit-place" type="submit">
+            Crear
+          </button>
+        </form>
+      </dialog>
+
       <main class="content">
         <section class="profile">
           <img src="./images/avatar.jpg" alt="avatar" class="profile__avatar" />
           <div class="profile__info">
-            <p class="profile__name">
-              Jacques Cousteau
+            <div class="profile__info-container">
+              <h1 class="profile__name">Jacques Cousteau</h1>
               <button class="profile__edit-button"></button>
-            </p>
+            </div>
             <p class="profile__description">Explorador</p>
           </div>
           <button class="elements__add-button"></button>
@@ -34,7 +92,9 @@
 
         <section class="elements">
           <div class="elements__card">
-            <div class="elements__card__photo elements__card__photo_estatua-libertad">
+            <div
+              class="elements__card__photo elements__card__photo_estatua-libertad"
+            >
               <button class="elements__card__btn-trash"></button>
             </div>
             <div class="elements__card__info">
@@ -43,39 +103,53 @@
             </div>
           </div>
           <div class="elements__card">
-            <div class="elements__card__photo elements__card__photo_golden-gate-bridge">
+            <div
+              class="elements__card__photo elements__card__photo_golden-gate-bridge"
+            >
               <button class="elements__card__btn-trash"></button>
             </div>
             <div class="elements__card__info">
               <p class="elements__card__title">Golden Gate Bridge</p>
               <button class="elements__card__btn-hearth"></button>
             </div>
-          </div><div class="elements__card">
-            <div class="elements__card__photo elements__card__photo_cataratas-del-niagara">
+          </div>
+          <div class="elements__card">
+            <div
+              class="elements__card__photo elements__card__photo_cataratas-del-niagara"
+            >
               <button class="elements__card__btn-trash"></button>
             </div>
             <div class="elements__card__info">
               <p class="elements__card__title">Cataratas del Niágara</p>
               <button class="elements__card__btn-hearth"></button>
             </div>
-          </div><div class="elements__card">
-            <div class="elements__card__photo elements__card__photo_monte-rushmore">
+          </div>
+          <div class="elements__card">
+            <div
+              class="elements__card__photo elements__card__photo_monte-rushmore"
+            >
               <button class="elements__card__btn-trash"></button>
             </div>
             <div class="elements__card__info">
               <p class="elements__card__title">Monte Rushmore</p>
               <button class="elements__card__btn-hearth"></button>
             </div>
-          </div><div class="elements__card">
-            <div class="elements__card__photo elements__card__photo_space-neddle">
+          </div>
+          <div class="elements__card">
+            <div
+              class="elements__card__photo elements__card__photo_space-neddle"
+            >
               <button class="elements__card__btn-trash"></button>
             </div>
             <div class="elements__card__info">
               <p class="elements__card__title">Space Neddle</p>
               <button class="elements__card__btn-hearth"></button>
             </div>
-          </div><div class="elements__card">
-            <div class="elements__card__photo elements__card__photo_empire-state-building">
+          </div>
+          <div class="elements__card">
+            <div
+              class="elements__card__photo elements__card__photo_empire-state-building"
+            >
               <button class="elements__card__btn-trash"></button>
             </div>
             <div class="elements__card__info">
@@ -85,7 +159,9 @@
           </div>
         </section>
       </main>
-      <footer class="footer">&copy; 2024 Ana María Vargas</footer>
+      <footer class="footer">
+        <p class="footer_info">&copy; 2024 Ana María Vargas</p>
+      </footer>
     </div>
     <script src="./scripts/script.js"></script>
   </body>
