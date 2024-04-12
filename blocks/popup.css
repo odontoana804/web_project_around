@@ -116,3 +116,29 @@
   border: none;
   cursor: pointer;
 }
+
+@media screen and (max-width: 620px) {
+  .popup {
+    width: 282px;
+    height: 322px;
+  }
+
+  .popup__container {
+    width: 238px;
+  }
+
+  .popup__title {
+    font-size: 18px;
+  }
+
+  .popup__btn-submit {
+    font-size: 14px;
+  }
+
+  .popup___btn-close {
+    width: 26px;
+    height: 26px;
+    left: 256px;
+    top: -47px;
+  }
+}
