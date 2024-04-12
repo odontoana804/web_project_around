@@ -75,12 +75,21 @@
       "avatar info"
       "button button";
   }
+
   .profile__avatar {
     grid-area: avatar;
   }
 
   .profile__info-container {
     grid-area: info;
+  }
+
+  .profile__name {
+    max-width: 380px;
+  }
+
+  .profile__description {
+    max-width: 380px;
   }
 }
 
@@ -96,19 +105,18 @@
   }
 
   .profile__name {
+    max-width: 250px;
     font-size: 22px;
     line-height: 2.54;
   }
 
   .profile__description {
     font-size: 14px;
+    max-width: 300px;
   }
 
   .profile__info-container {
     max-width: 300px;
-  }
-
-  .profile__description {
-    max-width: 300px;
+    gap: 10px;
   }
 }
