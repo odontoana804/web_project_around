@@ -12,7 +12,7 @@
   height: 361px;
 }
 
-.elements__card__photo {
+.elements__card-photo {
   position: relative;
   width: 100%;
   background-position: center;
@@ -23,31 +23,31 @@
   border-radius: 10px 10px 0 0;
 }
 
-.elements__card__photo_estatua-libertad {
+.elements__card-photo_estatua-libertad {
   background-image: url("../images/estatua-de-la-libertad.jpg");
 }
 
-.elements__card__photo_golden-gate-bridge {
+.elements__card-photo_golden-gate-bridge {
   background-image: url("../images/Golden-Gate-Bridge.jpg");
 }
 
-.elements__card__photo_cataratas-del-niagara {
+.elements__card-photo_cataratas-del-niagara {
   background-image: url("../images/Cataratas-del-niagara.jpg");
 }
 
-.elements__card__photo_monte-rushmore {
+.elements__card-photo_monte-rushmore {
   background-image: url("../images/monte-rushmore.jpg");
 }
 
-.elements__card__photo_space-neddle {
+.elements__card-photo_space-neddle {
   background-image: url("../images/space-neddle.jpg");
 }
 
-.elements__card__photo_empire-state-building {
+.elements__card-photo_empire-state-building {
   background-image: url("../images/empire-state-building.jpg");
 }
 
-.elements__card__btn-hearth {
+.elements__card-btn-hearth {
   width: 21px;
   height: 19px;
   background-color: transparent;
@@ -58,16 +58,16 @@
   border: none;
 }
 
-.elements__card__btn-hearth:hover {
+.elements__card-btn-hearth:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
-.elements__card__btn-hearth_active {
+.elements__card-btn-hearth_active {
   background-image: url("../images/hearth-black.png");
 }
 
-.elements__card__btn-trash {
+.elements__card-btn-trash {
   position: absolute;
   top: 18px;
   right: 15px;
@@ -80,19 +80,19 @@
   border: none;
 }
 
-.elements__card__btn-trash:hover {
+.elements__card-btn-trash:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
-.elements__card__info {
+.elements__card-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: auto 18px 0px 21px;
 }
 
-.elements__card__title {
+.elements__card-title {
   max-width: 210px;
   font-size: 24px;
   font-weight: 900;
@@ -103,40 +103,14 @@
   cursor: pointer;
 }
 
-.elements__add-button {
-  width: 150px;
-  height: 50px;
-  box-sizing: border-box;
-  background-image: url("../images/add-button.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 0;
-  background-color: #000000;
-  color: #ffffff;
-  border: 2px solid #ffffff;
-  cursor: pointer;
-}
-
-.elements__add-button:hover {
-  opacity: 0.6;
-}
-
 @media screen and (max-width: 920px) {
   .elements {
     grid-template-columns: repeat(2, 282px);
-  }
-
-  .elements__add-button {
-    width: 100%;
-    grid-area: button;
   }
 }
 
 @media screen and (max-width: 620px) {
   .elements {
     grid-template-columns: 282px;
-  }
-  .elements__add-button {
-    width: 282px;
   }
 }
