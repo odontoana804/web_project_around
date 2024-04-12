@@ -1,18 +1,18 @@
-let editButtonProfile = document.querySelector(".profile__edit-button");
-let profileName = document.querySelector(".profile__name");
-let profileDescription = document.querySelector(".profile__description");
-let popupProfile = document.querySelector("#popup__profile");
-let cancelButtonProfile = document.querySelector("#btn-close-profile");
-let confirmButtonProfile = document.querySelector("#btn-submit-profile");
+const editButtonProfile = document.querySelector(".profile__edit-button");
+const profileName = document.querySelector(".profile__name");
+const profileDescription = document.querySelector(".profile__description");
+const popupProfile = document.querySelector("#popup__profile");
+const cancelButtonProfile = document.querySelector("#btn-close-profile");
+const confirmButtonProfile = document.querySelector("#btn-submit-profile");
 
-let popupName = document.querySelector(".popup__name");
-let popupAbout = document.querySelector(".popup__about");
-let popupOverlay = document.querySelector(".popup__overlay");
+const popupName = document.querySelector(".popup__name");
+const popupAbout = document.querySelector(".popup__about");
+const popupOverlay = document.querySelector(".popup__overlay");
 
-let popupPlace = document.querySelector("#popup__place");
-let addButtonPlace = document.querySelector(".elements__add-button");
-let cancelButtonPlace = document.querySelector("#btn-close-place");
-let confirmButtonPlace = document.querySelector("#btn-submit-place");
+const popupPlace = document.querySelector("#popup__place");
+const addButtonPlace = document.querySelector(".elements__add-button");
+const cancelButtonPlace = document.querySelector("#btn-close-place");
+const confirmButtonPlace = document.querySelector("#btn-submit-place");
 
 function showPopUpProfile() {
   popupProfile.classList.add("popup_opened");
@@ -70,7 +70,7 @@ confirmButtonPlace.addEventListener("click", confirmPopUpPlace);
 // Intento de código para botón de Like
 // Solo funciona en la primera tarjeta
 
-let likeButton = document.querySelector(".elements__card__btn-hearth");
+const likeButton = document.querySelector(".elements__card__btn-hearth");
 
 function toggleLike() {
   likeButton.classList.toggle("elements__card__btn-hearth_active");
