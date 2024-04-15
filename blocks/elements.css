@@ -15,36 +15,20 @@
 .elements__card-photo {
   position: relative;
   width: 100%;
+  height: 282px;
+  background-color: #000000;
   background-position: center;
   background-size: cover;
-  padding-bottom: 100%;
   background-repeat: no-repeat;
   margin: 0;
   border-radius: 10px 10px 0 0;
 }
 
-.elements__card-photo_estatua-libertad {
-  background-image: url("../images/estatua-de-la-libertad.jpg");
-}
-
-.elements__card-photo_golden-gate-bridge {
-  background-image: url("../images/Golden-Gate-Bridge.jpg");
-}
-
-.elements__card-photo_cataratas-del-niagara {
-  background-image: url("../images/Cataratas-del-niagara.jpg");
-}
-
-.elements__card-photo_monte-rushmore {
-  background-image: url("../images/monte-rushmore.jpg");
-}
-
-.elements__card-photo_space-neddle {
-  background-image: url("../images/space-neddle.jpg");
-}
-
-.elements__card-photo_empire-state-building {
-  background-image: url("../images/empire-state-building.jpg");
+.elements__card-photo-imagen {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
 }
 
 .elements__card-btn-hearth {

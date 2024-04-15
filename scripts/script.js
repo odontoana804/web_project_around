@@ -1,24 +1,29 @@
-const editButtonProfile = document.querySelector(".profile__edit-button");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
-const popupProfile = document.querySelector("#popup__profile");
-const cancelButtonProfile = document.querySelector("#btn-close-profile");
-const confirmButtonProfile = document.querySelector("#btn-submit-profile");
 
-const popupName = document.querySelector(".popup__name");
-const popupAbout = document.querySelector(".popup__about");
+const popupProfile = document.querySelector("#popup__profile");
+const popupNameProfile = document.querySelector("#popup__name-profile");
+const popupAboutProfile = document.querySelector("#popup__about-profile");
+const confirmButtonProfile = document.querySelector("#btn-submit-profile");
+const cancelButtonProfile = document.querySelector("#btn-close-profile");
+const editButtonProfile = document.querySelector(".profile__edit-button");
+
 const popupOverlay = document.querySelector(".overlay");
 
 const popupPlace = document.querySelector("#popup__place");
+const popupNamePlace = document.querySelector("#popup__name-place");
+const popupAboutPlace = document.querySelector("#popup__about-place");
 const addButtonPlace = document.querySelector(".profile__add-button");
 const cancelButtonPlace = document.querySelector("#btn-close-place");
 const confirmButtonPlace = document.querySelector("#btn-submit-place");
 
+const cardContainer = document.querySelector(".elements");
+
 function showPopUpProfile() {
   popupProfile.classList.add("popup_opened");
   popupOverlay.classList.add("overlay_opened");
-  popupName.value = document.querySelector(".profile__name").textContent;
-  popupAbout.value = document.querySelector(
+  popupNameProfile.value = document.querySelector(".profile__name").textContent;
+  popupAboutProfile.value = document.querySelector(
     ".profile__description"
   ).textContent;
 }
@@ -29,15 +34,11 @@ function closePopUpProfile() {
 }
 
 function confirmPopUpProfile() {
-  profileName.innerHTML = popupName.value;
-  if (popupName.value == "") {
-    profileName.innerHTML = "Actualizar nombre";
+  if (popupNameProfile.value !== "" && popupAboutProfile.value !== "") {
+    profileName.innerHTML = popupNameProfile.value;
+    profileDescription.innerHTML = popupAboutProfile.value;
+    closePopUpProfile();
   }
-  profileDescription.innerHTML = popupAbout.value;
-  if (popupAbout.value == "") {
-    profileDescription.innerHTML = "Actualizar profesión";
-  }
-  closePopUpProfile();
 }
 
 function showPopUpPlace() {
@@ -51,7 +52,30 @@ function closePopUpPlace() {
 }
 
 function confirmPopUpPlace() {
-  closePopUpPlace();
+  if (popupAboutPlace.value !== "" && popupNamePlace.value !== "") {
+    cardContainer.insertAdjacentHTML(
+      "beforeend",
+      `
+          <div class="elements__card">
+            <div class="elements__card-photo">
+            <img
+                src=${popupAboutPlace.value}
+                alt=${popupNamePlace.value}
+                class="elements__card-photo-imagen"
+                />
+              <button class="elements__card-btn-trash"></button>
+            </div>
+            <div class="elements__card-info">
+              <p class="elements__card-title">${popupNamePlace.value}</p>
+              <button class="elements__card-btn-hearth"></button>
+            </div>
+          </div>
+      `
+    );
+    popupNamePlace.value = "";
+    popupAboutPlace.value = "";
+    closePopUpPlace();
+  }
 }
 
 editButtonProfile.addEventListener("click", showPopUpProfile);
