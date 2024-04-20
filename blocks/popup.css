@@ -35,7 +35,7 @@
   color: #000000;
 }
 
-.popup__name {
+.popup__name, .popup__about {
   width: 100%;
   margin: 54px auto 0;
   padding-bottom: 13px;
@@ -47,23 +47,11 @@
   line-height: 1.21;
 }
 
-.popup__name::placeholder {
-  color: #c4c4c4;
-}
-
 .popup__about {
-  width: 100%;
   margin: 29px auto 48px;
-  padding-bottom: 13px;
-  border: none;
-  border-bottom: 1px solid #c4c4c4;
-  color: #000000;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.21;
 }
 
-.popup__about::placeholder {
+.popup__name::placeholder, .popup__about::placeholder {
   color: #c4c4c4;
 }
 

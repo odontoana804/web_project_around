@@ -12,92 +12,119 @@ const popupOverlay = document.querySelector(".overlay");
 
 const popupPlace = document.querySelector("#popup__place");
 const popupNamePlace = document.querySelector("#popup__name-place");
-const popupAboutPlace = document.querySelector("#popup__about-place");
+const popupUrlPlace = document.querySelector("#popup__url-place");
 const addButtonPlace = document.querySelector(".profile__add-button");
 const cancelButtonPlace = document.querySelector("#btn-close-place");
 const confirmButtonPlace = document.querySelector("#btn-submit-place");
 
 const cardContainer = document.querySelector(".elements");
 
-function showPopUpProfile() {
-  popupProfile.classList.add("popup_opened");
-  popupOverlay.classList.add("overlay_opened");
-  popupNameProfile.value = document.querySelector(".profile__name").textContent;
-  popupAboutProfile.value = document.querySelector(
-    ".profile__description"
-  ).textContent;
+//muestra las ventanas popUps
+function showPopUp(popup, overlay) {
+  popup.classList.add("popup_opened");
+  overlay.classList.add("overlay_opened");
 }
 
-function closePopUpProfile() {
-  popupProfile.classList.remove("popup_opened");
-  popupOverlay.classList.remove("overlay_opened");
+//cierra las ventanas popUps
+function closePopUp(popup, overlay) {
+  popup.classList.remove("popup_opened");
+  overlay.classList.remove("overlay_opened");
 }
 
-function confirmPopUpProfile() {
-  if (popupNameProfile.value !== "" && popupAboutProfile.value !== "") {
-    profileName.innerHTML = popupNameProfile.value;
-    profileDescription.innerHTML = popupAboutProfile.value;
-    closePopUpProfile();
-  }
+//edita los campos del nombre del perfil y la profesión
+function editProfile(name, about) {
+  profileName.textContent = name;
+  profileDescription.textContent = about;
 }
 
-function showPopUpPlace() {
-  popupPlace.classList.add("popup_opened");
-  popupOverlay.classList.add("overlay_opened");
-}
-
-function closePopUpPlace() {
-  popupPlace.classList.remove("popup_opened");
-  popupOverlay.classList.remove("overlay_opened");
-}
-
-function confirmPopUpPlace() {
-  if (popupAboutPlace.value !== "" && popupNamePlace.value !== "") {
-    cardContainer.insertAdjacentHTML(
-      "beforeend",
-      `
+//agrega el código HTML de las tarjetas de lugares
+function addPlace(name, url) {
+  cardContainer.insertAdjacentHTML(
+    "beforeend",
+    `
           <div class="elements__card">
             <div class="elements__card-photo">
             <img
-                src=${popupAboutPlace.value}
-                alt=${popupNamePlace.value}
+                src=${url}
+                alt=${name}
                 class="elements__card-photo-imagen"
                 />
               <button class="elements__card-btn-trash"></button>
             </div>
             <div class="elements__card-info">
-              <p class="elements__card-title">${popupNamePlace.value}</p>
+              <p class="elements__card-title">${name}</p>
               <button class="elements__card-btn-hearth"></button>
             </div>
           </div>
       `
-    );
-    popupNamePlace.value = "";
-    popupAboutPlace.value = "";
-    closePopUpPlace();
+  );
+}
+
+//abre la ventana popup Profile al dar click en el icono del lápiz (editar)
+editButtonProfile.addEventListener("click", () => {
+  showPopUp(popupProfile, popupOverlay);
+  popupNameProfile.value = document.querySelector(".profile__name").textContent;
+  popupAboutProfile.value = document.querySelector(
+    ".profile__description"
+  ).textContent;
+});
+
+//cierra la ventana popUp Profile al dar click en el icono de X (cerrar)
+cancelButtonProfile.addEventListener("click", () =>
+  closePopUp(popupProfile, popupOverlay)
+);
+
+//cambia el contenido de los campos de nombre y acercaDe del Profile al dar click en el botón Guardar
+confirmButtonProfile.addEventListener("click", () => {
+  if (popupNameProfile.value !== "" && popupAboutProfile.value !== "") {
+    editProfile(popupNameProfile.value, popupAboutProfile.value);
+    closePopUp(popupProfile, popupOverlay);
+  }
+});
+
+//abre la ventana popup Place al dar click en el icono del + (agregar)
+addButtonPlace.addEventListener("click", () => {
+  showPopUp(popupPlace, popupOverlay);
+  popupNamePlace.value = "";
+  popupUrlPlace.value = "";
+});
+
+//cierra la ventana popUp Place al dar click en el icono de X (cerrar)
+cancelButtonPlace.addEventListener("click", () =>
+  closePopUp(popupPlace, popupOverlay)
+);
+
+//agrega una nueva tarjeta a lugares al daer click en el botón Crear
+confirmButtonPlace.addEventListener("click", () => {
+  if (popupUrlPlace.value !== "" && popupNamePlace.value !== "") {
+    addPlace(popupNamePlace.value, popupUrlPlace.value);
+    closePopUp(popupPlace, popupOverlay);
+  }
+});
+
+//------------------------------------------------------------------
+// Intento de código para botón de Like, solo funciona en las tarjetas ya creadas, no en las nuevas
+
+function toggleLike() {
+  const likeButtons = document.querySelectorAll(".elements__card-btn-hearth");
+  for (let button of likeButtons) {
+    button.addEventListener("click", () => {
+      button.classList.toggle("elements__card-btn-hearth_active");
+    });
   }
 }
 
-editButtonProfile.addEventListener("click", showPopUpProfile);
+toggleLike();
 
-cancelButtonProfile.addEventListener("click", closePopUpProfile);
 
-confirmButtonProfile.addEventListener("click", confirmPopUpProfile);
-
-addButtonPlace.addEventListener("click", showPopUpPlace);
-
-cancelButtonPlace.addEventListener("click", closePopUpPlace);
-
-confirmButtonPlace.addEventListener("click", confirmPopUpPlace);
-
-//------------------------------------------------------------------
-// Intento de código para botón de Like
-// Solo funciona en la primera tarjeta
-
-const likeButton = document.querySelector(".elements__card-btn-hearth");
-
-function toggleLike() {
-  likeButton.classList.toggle("elements__card-btn-hearth_active");
+/* function toggleLike() {
+  const likeButtons = document.querySelectorAll(".elements__card-btn-hearth");
+  likeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      button.classList.toggle("elements__card-btn-hearth_active");
+    });
+  });
 }
 
-likeButton.addEventListener("click", toggleLike);
+toggleLike();
+ */
