@@ -17,6 +17,8 @@ const addButtonPlace = document.querySelector(".profile__add-button");
 const cancelButtonPlace = popupPlace.querySelector("#btn-close-place");
 const confirmButtonPlace = popupPlace.querySelector("#btn-submit-place");
 
+const popupImage = document.querySelector("#popup__image");
+
 const cardsContainer = document.querySelector(".elements");
 
 const initialCards = [
@@ -73,7 +75,34 @@ function editProfile(name, about) {
   profileDescription.textContent = about;
 }
 
-//agrega el código HTML de las tarjetas de lugares
+//muesta la ventana de visaulización de las imagenes
+function showPopUpImage(popup, overlay) {
+  popup.classList.add("img-popup_opened");
+  overlay.classList.add("overlay_opened");
+}
+
+//cierre la ventana de visualización de las imagenes
+function closePopUpImage(popup, overlay) {
+  popup.classList.remove("img-popup_opened");
+  overlay.classList.remove("overlay_opened");
+}
+
+//revisar esta función
+function deleteCard() {
+  const trashButtons = document.querySelectorAll(".elements__card-btn-trash");
+  for (const button of trashButtons) {
+    button.addEventListener("click", (id) => {
+      let indiceEliminar = initialCards.findIndex(
+        (initialCard) => initialCard.id === id
+      );
+      initialCards.splice(indiceEliminar, 1);
+      const cardItem = button.closest(".elements__card");
+      cardItem.remove();
+    });
+  }
+}
+
+//función para agregar tarjetas de lugares
 function addPlace(name, url) {
   //creación de tarjetas clonando contenido de template
   const cardTemplate = document.querySelector("#card-template").content;
@@ -83,25 +112,30 @@ function addPlace(name, url) {
   newCard.querySelector(".elements__card-title").textContent = name;
   cardsContainer.prepend(newCard);
 
+  //llamada a la función para eliminar una tarjeta
+  deleteCard();
+
   //codigo para botón de like con event.target
   const likeButton = newCard.querySelector(".elements__card-btn-hearth");
   likeButton.addEventListener("click", (evt) => {
     evt.target.classList.toggle("elements__card-btn-hearth_active");
   });
 
-  //codigo que también funciona para botón de like con .closest
-  /* const likeButton = newCard.querySelector(".elements__card-btn-hearth");
-  likeButton.addEventListener("click", () => {
-    const buttonItem = likeButton.closest(".elements__card-btn-hearth");
-    buttonItem.classList.toggle("elements__card-btn-hearth_active");
-  }); */
-
-  //codigo para eliminar tarjeta
-  const trashButton = newCard.querySelector(".elements__card-btn-trash");
-  trashButton.addEventListener("click", () => {
-    const cardItem = trashButton.closest(".elements__card");
-    cardItem.remove();
+  //código para agregar la función de la previsualización de imagen
+  const imagePreview = newCard.querySelector(".elements__card-photo-imagen");
+  imagePreview.addEventListener("click", () => {
+    showPopUpImage(popupImage, popupOverlay);
+    const imageValue = popupImage.querySelector(".img-popup__preview");
+    imageValue.src = url;
+    const imageTitle = popupImage.querySelector(".img-popup__title");
+    imageTitle.textContent = name;
   });
+
+  //código para cerrar el popup de previsualización de imagen con el cancel buton
+  const cancelButtonPopupImage = popupImage.querySelector("#btn-close-image");
+  cancelButtonPopupImage.addEventListener("click", () =>
+    closePopUpImage(popupImage, popupOverlay)
+  );
 }
 
 //llamada a la función para cargar las tarjetas ya creadas
@@ -134,7 +168,6 @@ addButtonPlace.addEventListener("click", () => {
   showPopUp(popupPlace, popupOverlay);
   popupNamePlace.value = "";
   popupUrlPlace.value = "";
-
 });
 
 //cierra la ventana popUp Place al dar click en el icono de X (cerrar)
