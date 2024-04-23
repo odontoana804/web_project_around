@@ -2,22 +2,58 @@ const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 
 const popupProfile = document.querySelector("#popup__profile");
-const popupNameProfile = document.querySelector("#popup__name-profile");
-const popupAboutProfile = document.querySelector("#popup__about-profile");
-const confirmButtonProfile = document.querySelector("#btn-submit-profile");
-const cancelButtonProfile = document.querySelector("#btn-close-profile");
+const popupNameProfile = popupProfile.querySelector("#popup__name-profile");
+const popupAboutProfile = popupProfile.querySelector("#popup__about-profile");
+const confirmButtonProfile = popupProfile.querySelector("#btn-submit-profile");
+const cancelButtonProfile = popupProfile.querySelector("#btn-close-profile");
 const editButtonProfile = document.querySelector(".profile__edit-button");
 
 const popupOverlay = document.querySelector(".overlay");
 
 const popupPlace = document.querySelector("#popup__place");
-const popupNamePlace = document.querySelector("#popup__name-place");
-const popupUrlPlace = document.querySelector("#popup__url-place");
+const popupNamePlace = popupPlace.querySelector("#popup__name-place");
+const popupUrlPlace = popupPlace.querySelector("#popup__url-place");
 const addButtonPlace = document.querySelector(".profile__add-button");
-const cancelButtonPlace = document.querySelector("#btn-close-place");
-const confirmButtonPlace = document.querySelector("#btn-submit-place");
+const cancelButtonPlace = popupPlace.querySelector("#btn-close-place");
+const confirmButtonPlace = popupPlace.querySelector("#btn-submit-place");
 
-const cardContainer = document.querySelector(".elements");
+const cardsContainer = document.querySelector(".elements");
+
+const initialCards = [
+  {
+    name: "Estatua de la libertad",
+    url: "./images/estatua-de-la-libertad.jpg",
+  },
+  {
+    name: "Golden Gate Bridge",
+    url: "./images/Golden-Gate-Bridge.jpg",
+  },
+  {
+    name: "Cataratas del Niágara",
+    url: "./images/Cataratas-del-niagara.jpg",
+  },
+  {
+    name: "Monte Rushmore",
+    url: "./images/monte-rushmore.jpg",
+  },
+  {
+    name: "Space Neddle",
+    url: "./images/space-neddle.jpg",
+  },
+  {
+    name: "Empire State Building",
+    url: "./images/empire-state-building.jpg",
+  },
+];
+
+//carga las tarjetas creadas desde el arreglo
+function loadCards() {
+  let createdCards = "";
+  for (let initialCard of initialCards) {
+    createdCards += addPlace(initialCard.name, initialCard.url);
+  }
+  cardsContainer.content = createdCards;
+}
 
 //muestra las ventanas popUps
 function showPopUp(popup, overlay) {
@@ -39,26 +75,37 @@ function editProfile(name, about) {
 
 //agrega el código HTML de las tarjetas de lugares
 function addPlace(name, url) {
-  cardContainer.insertAdjacentHTML(
-    "beforeend",
-    `
-          <div class="elements__card">
-            <div class="elements__card-photo">
-            <img
-                src=${url}
-                alt=${name}
-                class="elements__card-photo-imagen"
-                />
-              <button class="elements__card-btn-trash"></button>
-            </div>
-            <div class="elements__card-info">
-              <p class="elements__card-title">${name}</p>
-              <button class="elements__card-btn-hearth"></button>
-            </div>
-          </div>
-      `
-  );
+  //creación de tarjetas clonando contenido de template
+  const cardTemplate = document.querySelector("#card-template").content;
+  const newCard = cardTemplate.querySelector(".elements__card").cloneNode(true);
+  newCard.querySelector(".elements__card-photo-imagen").src = url;
+  newCard.querySelector(".elements__card-photo-imagen").alt = name;
+  newCard.querySelector(".elements__card-title").textContent = name;
+  cardsContainer.prepend(newCard);
+
+  //codigo para botón de like con event.target
+  const likeButton = newCard.querySelector(".elements__card-btn-hearth");
+  likeButton.addEventListener("click", (evt) => {
+    evt.target.classList.toggle("elements__card-btn-hearth_active");
+  });
+
+  //codigo que también funciona para botón de like con .closest
+  /* const likeButton = newCard.querySelector(".elements__card-btn-hearth");
+  likeButton.addEventListener("click", () => {
+    const buttonItem = likeButton.closest(".elements__card-btn-hearth");
+    buttonItem.classList.toggle("elements__card-btn-hearth_active");
+  }); */
+
+  //codigo para eliminar tarjeta
+  const trashButton = newCard.querySelector(".elements__card-btn-trash");
+  trashButton.addEventListener("click", () => {
+    const cardItem = trashButton.closest(".elements__card");
+    cardItem.remove();
+  });
 }
+
+//llamada a la función para cargar las tarjetas ya creadas
+loadCards();
 
 //abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 editButtonProfile.addEventListener("click", () => {
@@ -87,6 +134,7 @@ addButtonPlace.addEventListener("click", () => {
   showPopUp(popupPlace, popupOverlay);
   popupNamePlace.value = "";
   popupUrlPlace.value = "";
+
 });
 
 //cierra la ventana popUp Place al dar click en el icono de X (cerrar)
@@ -101,30 +149,3 @@ confirmButtonPlace.addEventListener("click", () => {
     closePopUp(popupPlace, popupOverlay);
   }
 });
-
-//------------------------------------------------------------------
-// Intento de código para botón de Like, solo funciona en las tarjetas ya creadas, no en las nuevas
-
-function toggleLike() {
-  const likeButtons = document.querySelectorAll(".elements__card-btn-hearth");
-  for (let button of likeButtons) {
-    button.addEventListener("click", () => {
-      button.classList.toggle("elements__card-btn-hearth_active");
-    });
-  }
-}
-
-toggleLike();
-
-
-/* function toggleLike() {
-  const likeButtons = document.querySelectorAll(".elements__card-btn-hearth");
-  likeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      button.classList.toggle("elements__card-btn-hearth_active");
-    });
-  });
-}
-
-toggleLike();
- */
