@@ -29,6 +29,7 @@
   width: 100%;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
+  cursor: pointer;
 }
 
 .elements__card-btn-hearth {
@@ -40,11 +41,13 @@
   background-repeat: no-repeat;
   padding: 0;
   border: none;
+  transition: 0.3s;
 }
 
 .elements__card-btn-hearth:hover {
   opacity: 0.6;
   cursor: pointer;
+  transform: scale(1.3);
 }
 
 .elements__card-btn-hearth_active {
@@ -62,11 +65,15 @@
   background-position: center;
   background-repeat: no-repeat;
   border: none;
+  transition: 0.3s;
+
 }
 
 .elements__card-btn-trash:hover {
   opacity: 0.6;
   cursor: pointer;
+  transform: scale(1.3);
+
 }
 
 .elements__card-info {
@@ -84,7 +91,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 920px) {
