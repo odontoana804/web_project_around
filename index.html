@@ -21,23 +21,29 @@
       </header>
 
       <div class="overlay"></div>
-      <dialog class="popup" id="popup__profile">
-        <form method="dialog" class="popup__container">
+      <div class="popup" id="popup__profile">
+        <form  class="popup__container" novalidate>
           <p class="popup__title">Editar Perfil</p>
           <input
-            class="popup__name"
+            class="popup__input"
             placeholder="Nombre"
             type="text"
-            id="popup__name-profile"
+            id="name-profile"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="popup__input-error name-profile-input-error"></span>
           <input
-            class="popup__about"
+            class="popup__input"
             placeholder="Acerca de mí"
             type="text"
-            id="popup__about-profile"
+            id="about-profile"
+            minlength="2"
+            maxlength="200"
             required
           />
+          <span class="popup__input-error about-profile-input-error">mensaje de error</span>
           <button
             class="popup__btn-close"
             id="btn-close-profile"
@@ -51,25 +57,29 @@
             Guardar
           </button>
         </form>
-      </dialog>
+      </div>
 
-      <dialog class="popup" id="popup__place">
-        <form method="dialog" class="popup__container">
+      <div class="popup" id="popup__place">
+        <form class="popup__container" novalidate>
           <p class="popup__title">Nuevo lugar</p>
           <input
-            class="popup__name"
+            class="popup__input"
             placeholder="Título"
             type="text"
-            id="popup__name-place"
+            id="name-place"
+            minlength="2"
+            maxlength="30"
             required
           />
+          <span class="popup__input-error name-place-input-error">mensaje de error</span>
           <input
-            class="popup__about"
+            class="popup__input"
             placeholder="Enlace a la imagen"
-            type="text"
-            id="popup__url-place"
+            type="url"
+            id="url-place"
             required
           />
+          <span class="popup__input-error url-place-input-error">mensaje de error</span>
           <button
             class="popup__btn-close"
             id="btn-close-place"
@@ -79,9 +89,9 @@
             Crear
           </button>
         </form>
-      </dialog>
+      </div>
 
-      <dialog class="img-popup" id="popup__image">
+      <div class="img-popup" id="popup__image">
         <button
           class="img-popup__btn-close"
           id="btn-close-image"
@@ -91,7 +101,7 @@
           <img src=" " alt=" " class="img-popup__preview" />
           <p class="img-popup__title"></p>
         </div>
-      </dialog>
+      </div>
 
       <main class="content">
         <section class="profile">
@@ -127,5 +137,6 @@
     </template>
 
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
