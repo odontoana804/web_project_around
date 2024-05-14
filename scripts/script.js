@@ -189,3 +189,19 @@ popupImage.addEventListener( "click", (evt) => {
     closePopUpImage(popupImage, popupOverlay)
   };
 });
+
+//código para cerrar las ventanas popUps cuando se de click en la superposición
+popupOverlay.addEventListener("click", () => {
+  closePopUp(popupProfile, popupOverlay);
+  closePopUp(popupPlace, popupOverlay);
+  closePopUpImage(popupImage, popupOverlay);
+});
+
+//código para cerrar las ventanas popUps con la tecla Escape
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closePopUp(popupProfile, popupOverlay);
+    closePopUp(popupPlace, popupOverlay);
+    closePopUpImage(popupImage, popupOverlay);
+  };
+});
