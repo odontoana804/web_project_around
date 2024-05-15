@@ -55,7 +55,7 @@ const initialCards = [
   },
 ];
 
-// función para crear Id únicos en las tarjetas
+//Función para crear Id únicos en las tarjetas
 function createUniqueId () {
   return Math.floor(Math.random() * new Date().getTime() * 3).toString();
 };
@@ -74,25 +74,43 @@ function loadCards() {
 function showPopUp(popup, overlay) {
   popup.classList.add("popup_opened");
   overlay.classList.add("overlay_opened");
+  document.addEventListener("keydown", closeAnyPopUpEscapeKey);
 };
 
 //Función para ocultar el popUp de agregar nuevas tarjetas y edición del perfil
 function closePopUp(popup, overlay) {
   popup.classList.remove("popup_opened");
   overlay.classList.remove("overlay_opened");
+  document.removeEventListener("keydown", closeAnyPopUpEscapeKey);
 };
 
 //Función para mostrar el popUp de la visualización de la imagen
 function showPopUpImage(popup, overlay) {
   popup.classList.add("img-popup_opened");
   overlay.classList.add("overlay_opened");
-}
+  document.addEventListener("keydown", closeAnyPopUpEscapeKey);
+};
 
 //Función para ocultar el popUp de la visualización de la imagen
 function closePopUpImage(popup, overlay) {
   popup.classList.remove("img-popup_opened");
   overlay.classList.remove("overlay_opened");
-}
+  document.removeEventListener("keydown", closeAnyPopUpEscapeKey);
+};
+
+//Función para cerrar las ventanas popUps
+function closeAnyPopUp () {
+  closePopUp(popupProfile, popupOverlay);
+  closePopUp(popupPlace, popupOverlay);
+  closePopUpImage(popupImage, popupOverlay);
+};
+
+//Función para cerrar las ventanas popUps con la tecla Escape
+function closeAnyPopUpEscapeKey (evt) {
+  if (evt.key === "Escape") {
+    closeAnyPopUp ();
+  }
+};
 
 //Función para editar los campos del nombre del perfil y la profesión
 function editProfile(name, about) {
@@ -100,7 +118,7 @@ function editProfile(name, about) {
   profileDescription.textContent = about;
 };
 
-//función para agregar tarjetas de lugares
+//Función para agregar tarjetas de lugares
 function addPlace(name, url, id) {
   //creación de tarjetas clonando contenido de template
   const cardTemplate = document.querySelector("#card-template").content;
@@ -119,9 +137,7 @@ loadCards();
 editButtonProfile.addEventListener("click", () => {
   showPopUp(popupProfile, popupOverlay);
   popupNameProfile.value = document.querySelector(".profile__name").textContent;
-  popupAboutProfile.value = document.querySelector(
-    ".profile__description"
-  ).textContent;
+  popupAboutProfile.value = document.querySelector(".profile__description").textContent;
   confirmButtonProfile.classList.remove("popup__btn-submit_inactive")
 });
 
@@ -183,25 +199,12 @@ cardsContainer.addEventListener( "click", (evt) => {
   };
 });
 
-//código para cerrar el popup de previsualización de imagen con el cancel button
+//cierra el popup de previsualización de imagen al dar click en el icono de X (cerrar)
 popupImage.addEventListener( "click", (evt) => {
   if (evt.target.classList.contains("img-popup__btn-close")) {
     closePopUpImage(popupImage, popupOverlay)
   };
 });
 
-//código para cerrar las ventanas popUps cuando se de click en la superposición
-popupOverlay.addEventListener("click", () => {
-  closePopUp(popupProfile, popupOverlay);
-  closePopUp(popupPlace, popupOverlay);
-  closePopUpImage(popupImage, popupOverlay);
-});
-
-//código para cerrar las ventanas popUps con la tecla Escape
-document.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
-    closePopUp(popupProfile, popupOverlay);
-    closePopUp(popupPlace, popupOverlay);
-    closePopUpImage(popupImage, popupOverlay);
-  };
-});
+//cierra las ventanas popUps cuando se de click en la superposición
+popupOverlay.addEventListener("click", closeAnyPopUp);

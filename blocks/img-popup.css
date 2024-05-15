@@ -17,6 +17,7 @@
 }
 
 .img-popup__container {
+  position: relative;
   margin: 0;
 }
 
@@ -28,6 +29,7 @@
 }
 
 .img-popup__title {
+  position: absolute;
   color: #ffffff;
   font-size: 12px;
   font-weight: 400;
