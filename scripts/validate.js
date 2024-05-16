@@ -17,13 +17,13 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass, errorCla
     showError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
   } else {
     hideError(formElement, inputElement, inputErrorClass, errorClass);
-  }
+  };
 };
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
-  })
+  });
 };
 
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
@@ -33,7 +33,7 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.removeAttribute("disabled");
-  }
+  };
 };
 
 const setEventListeners = (formElement, inputSelector, submitButtonSelector, inputErrorClass, errorClass, inactiveButtonClass) => {
@@ -66,3 +66,16 @@ enableValidation({
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active"
 });
+
+const resetValidation = ({inputSelector, errorSelector, inputErrorClass, errorClass}) => {
+  const inputList = Array.from(document.querySelectorAll(inputSelector));
+  const errorList = Array.from(document.querySelectorAll(errorSelector));
+  inputList.forEach((inputElement) => {
+    inputElement.classList.remove(inputErrorClass);
+  });
+  errorList.forEach((errorElement) => {
+    errorElement.classList.remove(errorClass);
+  });
+};
+
+export {resetValidation};

@@ -1,3 +1,5 @@
+import { resetValidation } from "./validate.js";
+
 //elementos que se editan en la seccion de profile
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
@@ -82,6 +84,12 @@ function closePopUp(popup, overlay) {
   popup.classList.remove("popup_opened");
   overlay.classList.remove("overlay_opened");
   document.removeEventListener("keydown", closeAnyPopUpEscapeKey);
+  resetValidation({
+    inputSelector: ".popup__input",
+    errorSelector: ".popup__input-error",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__input-error_active"
+  });
 };
 
 //Función para mostrar el popUp de la visualización de la imagen
@@ -138,8 +146,8 @@ editButtonProfile.addEventListener("click", () => {
   showPopUp(popupProfile, popupOverlay);
   popupNameProfile.value = document.querySelector(".profile__name").textContent;
   popupAboutProfile.value = document.querySelector(".profile__description").textContent;
-  confirmButtonProfile.classList.remove("popup__btn-submit_inactive");
-  confirmButtonProfile.removeAttribute("disabled");
+  confirmButtonProfile.classList.add("popup__btn-submit_inactive");
+  confirmButtonProfile.setAttribute("disabled", true);
 });
 
 //cierra la ventana popUp Profile al dar click en el icono de X (cerrar)

@@ -11,6 +11,6 @@ Los formularios de las ventanas modales cuentan con validación en tiempo real, 
 La página web esta desplegada en Github Pages y se aloja en el siguiente link:
 https://odontoana804.github.io/web_project_around/
 
-Planes de mejora para el futuro: Restablecer la validación de los formularios, y poder almacenar los datos de las tarjetas en una base de datos.
+Planes de mejora para el futuro: Almacenar los datos de las tarjetas en una base de datos.
 
 Página Web diseñada por Ana María Vargas.
