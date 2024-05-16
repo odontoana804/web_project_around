@@ -138,7 +138,8 @@ editButtonProfile.addEventListener("click", () => {
   showPopUp(popupProfile, popupOverlay);
   popupNameProfile.value = document.querySelector(".profile__name").textContent;
   popupAboutProfile.value = document.querySelector(".profile__description").textContent;
-  confirmButtonProfile.classList.remove("popup__btn-submit_inactive")
+  confirmButtonProfile.classList.remove("popup__btn-submit_inactive");
+  confirmButtonProfile.removeAttribute("disabled");
 });
 
 //cierra la ventana popUp Profile al dar click en el icono de X (cerrar)
@@ -159,12 +160,14 @@ addButtonPlace.addEventListener("click", () => {
   showPopUp(popupPlace, popupOverlay);
   popupNamePlace.value = "";
   popupUrlPlace.value = "";
+  confirmButtonPlace.classList.add("popup__btn-submit_inactive");
 });
 
 //cierra la ventana popUp Place al dar click en el icono de X (cerrar)
-cancelButtonPlace.addEventListener("click", () =>
-  closePopUp(popupPlace, popupOverlay)
-);
+cancelButtonPlace.addEventListener("click", () =>{
+  closePopUp(popupPlace, popupOverlay);
+  confirmButtonPlace.classList.add("popup__btn-submit_inactive");
+});
 
 //agrega una nueva tarjeta a lugares al daer click en el botón Crear
 confirmButtonPlace.addEventListener("click", () => {
@@ -173,7 +176,6 @@ confirmButtonPlace.addEventListener("click", () => {
     addPlace(popupNamePlace.value, popupUrlPlace.value, idNewPLace);
     initialCards.push({ name: popupNamePlace.value, url: popupUrlPlace.value, id : idNewPLace });
     closePopUp(popupPlace, popupOverlay);
-    confirmButtonPlace.classList.add("popup__btn-submit_inactive");
   };
 });
 
