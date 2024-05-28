@@ -1,3 +1,4 @@
+import { Card } from "./Card.js";
 import { resetValidation } from "./validate.js";
 
 //elementos que se editan en la seccion de profile
@@ -57,20 +58,16 @@ const initialCards = [
   },
 ];
 
-//Función para crear Id únicos en las tarjetas
-function createUniqueId () {
-  return Math.floor(Math.random() * new Date().getTime() * 3).toString();
-};
-
 //Función para cargar las tarjetas creadas desde el arreglo inicial
-function loadCards() {
-  let createdCards = "";
-  for (let initialCard of initialCards) {
-    initialCard.id = createUniqueId(); //crea un Id único para las tarjetas creadas desde el arreglo inicial
-    createdCards += addPlace(initialCard.name, initialCard.url, initialCard.id);
-  };
-  cardsContainer.content = createdCards;
-};
+(function loadCards() {
+  cardsContainer.innerHTML = "";
+  initialCards.forEach((initialCard) => {
+    const card = new Card(initialCard, "#card-template", initialCards)
+    initialCard.id = card._id
+    const cardElement = card.generateCard();
+    cardsContainer.prepend(cardElement);
+  });
+})();
 
 //Función para mostrar el popUp de agregar nuevas tarjetas y edición del perfil
 function showPopUp(popup, overlay) {
@@ -92,13 +89,6 @@ function closePopUp(popup, overlay) {
   });
 };
 
-//Función para mostrar el popUp de la visualización de la imagen
-function showPopUpImage(popup, overlay) {
-  popup.classList.add("img-popup_opened");
-  overlay.classList.add("overlay_opened");
-  document.addEventListener("keydown", closeAnyPopUpEscapeKey);
-};
-
 //Función para ocultar el popUp de la visualización de la imagen
 function closePopUpImage(popup, overlay) {
   popup.classList.remove("img-popup_opened");
@@ -117,7 +107,7 @@ function closeAnyPopUp () {
 function closeAnyPopUpEscapeKey (evt) {
   if (evt.key === "Escape") {
     closeAnyPopUp ();
-  }
+  };
 };
 
 //Función para editar los campos del nombre del perfil y la profesión
@@ -125,21 +115,6 @@ function editProfile(name, about) {
   profileName.textContent = name;
   profileDescription.textContent = about;
 };
-
-//Función para agregar tarjetas de lugares
-function addPlace(name, url, id) {
-  //creación de tarjetas clonando contenido de template
-  const cardTemplate = document.querySelector("#card-template").content;
-  const newCard = cardTemplate.querySelector(".elements__card").cloneNode(true);
-  newCard.querySelector(".elements__card-photo-imagen").src = url;
-  newCard.querySelector(".elements__card-photo-imagen").alt = name;
-  newCard.querySelector(".elements__card-photo-imagen").setAttribute("id", id )
-  newCard.querySelector(".elements__card-title").textContent = name;
-  cardsContainer.prepend(newCard);
-};
-
-//llamada a la función para cargar las tarjetas ya creadas en el arrgelo inicial
-loadCards();
 
 //abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 editButtonProfile.addEventListener("click", () => {
@@ -157,10 +132,8 @@ cancelButtonProfile.addEventListener("click", () => {
 
 //cambia el contenido de los campos de nombre y acercaDe del Profile al dar click en el botón Guardar
 confirmButtonProfile.addEventListener("click", () => {
-  if (popupNameProfile.value !== "" && popupAboutProfile.value !== "") {
     editProfile(popupNameProfile.value, popupAboutProfile.value);
     closePopUp(popupProfile, popupOverlay);
-  };
 });
 
 //abre la ventana popup Place al dar click en el icono del + (agregar)
@@ -179,42 +152,33 @@ cancelButtonPlace.addEventListener("click", () =>{
 
 //agrega una nueva tarjeta a lugares al daer click en el botón Crear
 confirmButtonPlace.addEventListener("click", () => {
-  if (popupUrlPlace.value !== "" && popupNamePlace.value !== "") {
-    const idNewPLace = createUniqueId(); //crea un Id único para las nuevas tarjetas
-    addPlace(popupNamePlace.value, popupUrlPlace.value, idNewPLace);
-    initialCards.push({ name: popupNamePlace.value, url: popupUrlPlace.value, id : idNewPLace });
-    closePopUp(popupPlace, popupOverlay);
-  };
-});
 
-//código para botón de like con event.target y agregar la función de la previsualización de imagen y eliminar un elemento del DOM y del arreglo initialCards
-cardsContainer.addEventListener( "click", (evt) => {
-  if (evt.target.classList.contains("elements__card-btn-hearth")) {
-    evt.target.classList.toggle("elements__card-btn-hearth_active");
-  };
-  if (evt.target.classList.contains("elements__card-photo-imagen")){
-    showPopUpImage(popupImage, popupOverlay);
-    const imageValue = popupImage.querySelector(".img-popup__preview");
-    imageValue.src = evt.target.currentSrc;
-    imageValue.alt = evt.target.alt;
-    const imageTitle = popupImage.querySelector(".img-popup__title");
-    imageTitle.textContent = evt.target.alt;
-  };
-  if (evt.target.classList.contains("elements__card-btn-trash")){
-    evt.target.closest(".elements__card").remove();
-    let indiceEliminar = initialCards.findIndex(
-      (initialCard) => initialCard.id === evt.target.previousElementSibling.id
-    );
-    initialCards.splice(indiceEliminar, 1);
-  };
+    //se crea un nuevo objeto con los valores de los inputs
+    const newCard ={
+      name: popupNamePlace.value,
+      url: popupUrlPlace.value
+    };
+    //se crea una nueva clase del obejor Card
+    const card = new Card(newCard, "#card-template", initialCards);
+    //se relaciona el id de la clase con la propiedad id del newCard
+    newCard.id = card._id;
+    //se genera la nueva tarjeta
+    const cardElement = card.generateCard();
+    //se inserta en el html
+    cardsContainer.prepend(cardElement);
+
+    //se inserta el obejto en el arreglo inicial
+    initialCards.push(newCard);
+    closePopUp(popupPlace, popupOverlay);
 });
 
 //cierra el popup de previsualización de imagen al dar click en el icono de X (cerrar)
 popupImage.addEventListener( "click", (evt) => {
   if (evt.target.classList.contains("img-popup__btn-close")) {
-    closePopUpImage(popupImage, popupOverlay)
+    closePopUpImage(popupImage, popupOverlay);
   };
 });
+
 
 //cierra las ventanas popUps cuando se de click en la superposición
 popupOverlay.addEventListener("click", closeAnyPopUp);

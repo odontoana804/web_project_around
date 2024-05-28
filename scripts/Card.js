@@ -1,9 +1,10 @@
 export class Card {
-  constructor( data, cardSelector) {
+  constructor( data, cardSelector, array) {
     this._id = this._createUniqueId()
     this._name = data.name;
     this._url = data.url;
     this._cardSelector = cardSelector;
+    this._array = array;
   };
 
   _createUniqueId () {
@@ -17,30 +18,43 @@ export class Card {
   };
 
   _setEventListeners() {
+    const popupImage = document.querySelector("#popup__image");
+    const popupOverlay = document.querySelector(".overlay");
 
     this._element.addEventListener( "click", (evt) => {
-      //evento para el boton de like
+      //evento para funcionalidad del boton de like
       if (evt.target.classList.contains("elements__card-btn-hearth")) {
         evt.target.classList.toggle("elements__card-btn-hearth_active");
       };
-      //evento para abrir el popup de imagen
+      //evento para mostrar el popUp de la visualización de la imagen
       if (evt.target.classList.contains("elements__card-photo-imagen")){
-        showPopUpImage(popupImage, popupOverlay);
+        this._showPopUpImage(popupImage, popupOverlay);
         const imageValue = popupImage.querySelector(".img-popup__preview");
         imageValue.src = evt.target.currentSrc;
         imageValue.alt = evt.target.alt;
         const imageTitle = popupImage.querySelector(".img-popup__title");
         imageTitle.textContent = evt.target.alt;
+        document.addEventListener("keydown",(evt) => {
+          if (evt.key === "Escape") {
+            popupImage.classList.remove("img-popup_opened");
+            popupOverlay.classList.remove("overlay_opened");
+          }
+        });
       };
-      //evento para el boton de eliminar
+      //evento para funcionalidad del boton de eliminar
       if (evt.target.classList.contains("elements__card-btn-trash")){
         evt.target.closest(".elements__card").remove();
-        let indiceEliminar = initialCards.findIndex(
-          (initialCard) => initialCard.id === evt.target.previousElementSibling.id
+        let indiceEliminar = this._array.findIndex(
+          (element) => element.id === evt.target.previousElementSibling.id
         );
-        initialCards.splice(indiceEliminar, 1);
+        this._array.splice(indiceEliminar, 1);
       };
     });
+  };
+  //Función para mostrar el popUp de la visualización de la imagen
+  _showPopUpImage(popup, overlay) {
+    popup.classList.add("img-popup_opened");
+    overlay.classList.add("overlay_opened");
   };
 
   //función para crear la tarjeta
