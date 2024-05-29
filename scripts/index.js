@@ -1,5 +1,5 @@
 import { Card } from "./Card.js";
-import { resetValidation } from "./validate.js";
+import { FormValidator} from "./FormValidator.js";
 
 //elementos que se editan en la seccion de profile
 const profileName = document.querySelector(".profile__name");
@@ -74,6 +74,7 @@ function showPopUp(popup, overlay) {
   popup.classList.add("popup_opened");
   overlay.classList.add("overlay_opened");
   document.addEventListener("keydown", closeAnyPopUpEscapeKey);
+  new FormValidator(popup).enableValidation();
 };
 
 //Función para ocultar el popUp de agregar nuevas tarjetas y edición del perfil
@@ -81,12 +82,7 @@ function closePopUp(popup, overlay) {
   popup.classList.remove("popup_opened");
   overlay.classList.remove("overlay_opened");
   document.removeEventListener("keydown", closeAnyPopUpEscapeKey);
-  resetValidation({
-    inputSelector: ".popup__input",
-    errorSelector: ".popup__input-error",
-    inputErrorClass: "popup__input_type_error",
-    errorClass: "popup__input-error_active"
-  });
+  new FormValidator(popup).resetValidation();
 };
 
 //Función para ocultar el popUp de la visualización de la imagen
