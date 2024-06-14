@@ -1,30 +1,34 @@
 export default class Popup {
-  constructor(popupSelector) {
-
+  constructor(popupSelector, {openPopupClass, openOverlayClass, closeButtonSelector, popupOverlay}) {
     this._popup = document.querySelector(popupSelector);
+    this._openPopupClass = openPopupClass;
+    this._overlayOpenClass = openOverlayClass;
+    this._closeButtonSelector = closeButtonSelector;
+    this._popupOverlay = popupOverlay;
   }
 
-  open(popup, overlay) {
-    popup.classList.add("popup_opened");
-    overlay.classList.add("overlay_opened");
-    new FormValidator(popup).enableValidation();
+  open() {
+    this._popup.classList.add(this._openPopupClass);
+    this._popupOverlay.classList.add(this._overlayOpenClass);
   }
 
-  close(popup, overlay) {
-    popup.classList.remove("popup_opened");
-    overlay.classList.remove("overlay_opened");
-    new FormValidator(popup).resetValidation();
+  close() {
+    this._popup.classList.remove(this._openPopupClass);
+    this._popupOverlay.classList.remove(this._overlayOpenClass);
   }
 
-  _handleEscClose() {
-
+  _handleEscClose(evt) {
+    if (evt.key === "Escape") {
+      this.close();
+    }
   }
 
   setEventListeners() {
-    this._element.querySelector(".popup__btn-close").addEventListener("click", () => {
-      this.close(popupProfile, popupOverlay);
+    this._popup.querySelector(this._closeButtonSelector).addEventListener("click", () => {
+      this.close();
     });
-
+    document.addEventListener("keydown", (evt) => this._handleEscClose(evt) );
   }
 
 }
+

@@ -1,3 +1,15 @@
+import PopupWithImage from "./PopupWithImage.js";
+
+const popupImageConfig = {
+  openPopupClass: "img-popup_opened",
+  openOverlayClass: "overlay_opened",
+  closeButtonSelector: ".img-popup__btn-close",
+  imagePreviewClass: ".img-popup__preview",
+  imageTitleClass: ".img-popup__title",
+  popupOverlay: document.querySelector(".overlay"),
+};
+
+
 export class Card {
   constructor( data, cardSelector, array) {
     this._id = this._createUniqueId()
@@ -28,13 +40,19 @@ export class Card {
       };
       //evento para mostrar el popUp de la visualización de la imagen
       if (evt.target.classList.contains("elements__card-photo-imagen")){
-        this._showPopUpImage(this._popupImage, this._popupOverlay);
+        const popupImage = new PopupWithImage("#popup__image", popupImageConfig, {
+          name: evt.target.alt,
+          image: evt.target.currentSrc
+        })
+        popupImage.open()
+        popupImage.setEventListeners()
+       /*  this._showPopUpImage(this._popupImage, this._popupOverlay);
         const imageValue = this._popupImage.querySelector(".img-popup__preview");
         imageValue.src = evt.target.currentSrc;
         imageValue.alt = evt.target.alt;
         const imageTitle = this._popupImage.querySelector(".img-popup__title");
         imageTitle.textContent = evt.target.alt;
-        document.addEventListener("keydown", this._closePopUpImageEscapeKey);
+        document.addEventListener("keydown", this._closePopUpImageEscapeKey); */
       };
       //evento para funcionalidad del boton de eliminar
       if (evt.target.classList.contains("elements__card-btn-trash")){
@@ -47,19 +65,19 @@ export class Card {
     });
   };
   //Función para mostrar el popUp de la visualización de la imagen
-  _showPopUpImage(popup, overlay) {
+/*   _showPopUpImage(popup, overlay) {
     popup.classList.add("img-popup_opened");
     overlay.classList.add("overlay_opened");
-  };
+  }; */
 
-  _closePopUpImageEscapeKey (evt) {
+ /*  _closePopUpImageEscapeKey (evt) {
     this._popupImage = document.querySelector("#popup__image");
     this._popupOverlay = document.querySelector(".overlay");
     if (evt.key === "Escape") {
       this._popupImage.classList.remove("img-popup_opened");
       this._popupOverlay.classList.remove("overlay_opened");
     };
-  };
+  }; */
 
   //función para crear la tarjeta
   generateCard() {

@@ -1,5 +1,6 @@
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
+import Popup from "../components/Popup.js";
 
 //elementos que se editan en la seccion de profile
 const profileName = document.querySelector(".profile__name");
@@ -101,22 +102,33 @@ function editProfile(name, about) {
   profileDescription.textContent = about;
 }
 
+const popupConfig = {
+  openPopupClass : "popup_opened",
+  openOverlayClass: "overlay_opened",
+  closeButtonSelector: ".popup__btn-close",
+  popupOverlay: document.querySelector(".overlay")
+}
+
+
 //abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 editButtonProfile.addEventListener("click", () => {
-  showPopUp(popupProfile, popupOverlay);
+  const popup = new Popup("#popup__profile", popupConfig)
+  popup.open()
+  popup.setEventListeners()
+  /* showPopUp(popupProfile, popupOverlay);
   popupNameProfile.value = document.querySelector(".profile__name").textContent;
   popupAboutProfile.value = document.querySelector(
     ".profile__description"
   ).textContent;
   confirmButtonProfile.classList.add("popup__btn-submit_inactive");
-  confirmButtonProfile.setAttribute("disabled", true);
+  confirmButtonProfile.setAttribute("disabled", true); */
 });
 
 //cierra la ventana popUp Profile al dar click en el icono de X (cerrar)
-cancelButtonProfile.addEventListener("click", () => {
+/* cancelButtonProfile.addEventListener("click", () => {
   closePopUp(popupProfile, popupOverlay);
 });
-
+ */
 //cambia el contenido de los campos de nombre y acercaDe del Profile al dar click en el botón Guardar
 confirmButtonProfile.addEventListener("click", () => {
   editProfile(popupNameProfile.value, popupAboutProfile.value);
