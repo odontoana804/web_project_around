@@ -1,5 +1,5 @@
 import { FormValidator } from "../components/FormValidator.js";
-import { popupPlace, popupProfile } from "../pages/index.js";
+import { popupPlace, popupProfile, userInfo } from "../pages/index.js";
 
 
 //elementos que se editan en la seccion de profile
@@ -109,7 +109,9 @@ editButtonProfile.addEventListener("click", () => {
   const popup = popupProfile.generatePopup()
   popupProfile.open()
   document.querySelector(".popup").prepend(popup)
+  userInfo.getUserInfo()
   new FormValidator(popup).enableValidation();
+  popupProfile.disableConfirmButton();
 
 
   /* showPopUp(popupProfile, popupOverlay);

@@ -29,7 +29,6 @@ export default class Popup {
     return this._popup;
   };
 
-
   open() {
     document.querySelector(this._popupUbication).classList.add(this._openPopupClass);
     this._popupOverlay.classList.add(this._overlayOpenClass);
@@ -40,7 +39,6 @@ export default class Popup {
     this._popupOverlay.classList.remove(this._overlayOpenClass);
     this._popup.closest(this._popupSelector).remove();
   }
-
 
   setEventListeners() {
     this._popup.querySelector(this._closeButtonSelector).addEventListener("click", () => this.close());
@@ -53,9 +51,7 @@ export default class Popup {
 
     this._popupOverlay.addEventListener("click", () => {
       this.close();
-      console.log("desde overlay")
     });
   }
-
 }
 

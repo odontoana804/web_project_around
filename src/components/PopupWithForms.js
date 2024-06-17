@@ -10,7 +10,8 @@ export default class PopupWithForms extends Popup {
       closeButtonSelector,
       popupUbication,
       popupOverlay,
-      inputSelector
+      inputSelector,
+      submitButtonSelector,
     },
     handleFormSubmit
   ) {
@@ -26,7 +27,8 @@ export default class PopupWithForms extends Popup {
       }
     );
     this._handleFormSubmit = handleFormSubmit;
-    this._inputSelector = inputSelector
+    this._inputSelector = inputSelector;
+    this._submitButtonSelector = submitButtonSelector;
   }
 
 
@@ -39,12 +41,10 @@ export default class PopupWithForms extends Popup {
     return this._formValues;
   }
 
-  /* _resetValues() {
-    this._inputList = this._popup.querySelectorAll(this._inputSelector);
-    this._inputList.forEach(input => {
-      input.value = "";
-    });
-  } */
+  disableConfirmButton() {
+    document.querySelector(this._popupSelector).querySelector(this._submitButtonSelector).classList.add("popup__btn-submit_inactive");
+    document.querySelector(this._popupSelector).querySelector(this._submitButtonSelector).setAttribute("disabled", true);
+  }
 
 
   setEventListeners() {
@@ -54,16 +54,6 @@ export default class PopupWithForms extends Popup {
       this._handleFormSubmit(this._getInputValues());
     })
   }
-/*
-  open () {
-    super.open();
-    //this._resetValues();
-  }
-
-  close() {
-    super.close()
-   // this._resetValues();
-  } */
 }
 
 
