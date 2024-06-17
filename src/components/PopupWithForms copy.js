@@ -2,33 +2,36 @@ import Popup from "./Popup.js";
 
 export default class PopupWithForms extends Popup {
   constructor(
-    popupTemplateSelector,
     popupSelector,
     {
       openPopupClass,
       openOverlayClass,
       closeButtonSelector,
-      popupUbication,
       popupOverlay,
       inputSelector
     },
     handleFormSubmit
   ) {
-    super(
-      popupTemplateSelector,
-      popupSelector,
-      {
-        openPopupClass,
-        openOverlayClass,
-        closeButtonSelector,
-        popupUbication,
-        popupOverlay,
-      }
-    );
+    super(popupSelector, {
+      openPopupClass,
+      openOverlayClass,
+      closeButtonSelector,
+      popupOverlay,
+    });
     this._handleFormSubmit = handleFormSubmit;
     this._inputSelector = inputSelector
   }
 
+ /*  _getTemplate() {
+    const newPopup = document.querySelector("#popupPlaceTemplate").content.querySelector(".popup__container").cloneNode(true);
+    return newPopup;
+  }
+
+  generatePopup() {
+    this._popup = this._getTemplate();
+    this.setEventListeners();
+    return this._popup;
+  } */
 
   _getInputValues() {
     this._inputList = this._popup.querySelectorAll(this._inputSelector);
@@ -39,31 +42,32 @@ export default class PopupWithForms extends Popup {
     return this._formValues;
   }
 
-  /* _resetValues() {
+  _resetValues() {
     this._inputList = this._popup.querySelectorAll(this._inputSelector);
     this._inputList.forEach(input => {
       input.value = "";
     });
-  } */
+  }
 
 
   setEventListeners() {
     super.setEventListeners()
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
+                          console.log(this._getInputValues())
       this._handleFormSubmit(this._getInputValues());
     })
   }
-/*
+
   open () {
     super.open();
-    //this._resetValues();
+    this._resetValues();
   }
 
   close() {
     super.close()
    // this._resetValues();
-  } */
+  }
 }
 
 

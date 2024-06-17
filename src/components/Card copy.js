@@ -4,11 +4,11 @@ const popupImageConfig = {
   openPopupClass: "img-popup_opened",
   openOverlayClass: "overlay_opened",
   closeButtonSelector: ".img-popup__btn-close",
-  popupUbication: ".img-popup",
   imagePreviewClass: ".img-popup__preview",
   imageTitleClass: ".img-popup__title",
   popupOverlay: document.querySelector(".overlay"),
 };
+
 
 export class Card {
   constructor( data, cardSelector, array) {
@@ -40,13 +40,12 @@ export class Card {
       };
       //evento para mostrar el popUp de la visualización de la imagen
       if (evt.target.classList.contains("elements__card-photo-imagen")){
-        const popupImage = new PopupWithImage("#popupImageTemplate", "#popup__image", popupImageConfig, {
+        const popupImage = new PopupWithImage("#popup__image", popupImageConfig, {
           name: evt.target.alt,
           image: evt.target.currentSrc
         })
-        const popup = popupImage.generatePopup()
         popupImage.open()
-        document.querySelector(popupImageConfig.popupUbication).prepend(popup)
+        popupImage.setEventListeners()
        /*  this._showPopUpImage(this._popupImage, this._popupOverlay);
         const imageValue = this._popupImage.querySelector(".img-popup__preview");
         imageValue.src = evt.target.currentSrc;

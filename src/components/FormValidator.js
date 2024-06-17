@@ -10,8 +10,8 @@ const validationConfig = {
 
 export class FormValidator {
   constructor( popup, config = validationConfig ){
-    this._popup = popup.querySelector(".popup__container");
     this._config = config
+    this._popup = popup.querySelector(this._config.formSelector);
   };
 
   _showError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {

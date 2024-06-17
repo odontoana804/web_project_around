@@ -1,33 +1,60 @@
 export default class Popup {
-  constructor(popupSelector, {openPopupClass, openOverlayClass, closeButtonSelector, popupOverlay}) {
-    this._popup = document.querySelector(popupSelector);
+  constructor(
+    popupTemplateSelector,
+    popupSelector,
+    {
+      openPopupClass,
+      openOverlayClass,
+      closeButtonSelector,
+      popupUbication,
+      popupOverlay
+    }) {
+    this._popupTemplateSelector = popupTemplateSelector
+    this._popupSelector = popupSelector
     this._openPopupClass = openPopupClass;
     this._overlayOpenClass = openOverlayClass;
     this._closeButtonSelector = closeButtonSelector;
+    this._popupUbication = popupUbication;
     this._popupOverlay = popupOverlay;
   }
 
+  _getTemplate() {
+    const newPopup = document.querySelector(this._popupTemplateSelector).content.querySelector(this._popupSelector).cloneNode(true);
+    return newPopup;
+  }
+
+  generatePopup() {
+    this._popup = this._getTemplate();
+    this.setEventListeners();
+    return this._popup;
+  };
+
+
   open() {
-    this._popup.classList.add(this._openPopupClass);
+    document.querySelector(this._popupUbication).classList.add(this._openPopupClass);
     this._popupOverlay.classList.add(this._overlayOpenClass);
   }
 
   close() {
-    this._popup.classList.remove(this._openPopupClass);
+    document.querySelector(this._popupUbication).classList.remove(this._openPopupClass);
     this._popupOverlay.classList.remove(this._overlayOpenClass);
+    this._popup.closest(this._popupSelector).remove();
   }
 
-  _handleEscClose(evt) {
-    if (evt.key === "Escape") {
-      this.close();
-    }
-  }
 
   setEventListeners() {
-    this._popup.querySelector(this._closeButtonSelector).addEventListener("click", () => {
-      this.close();
+    this._popup.querySelector(this._closeButtonSelector).addEventListener("click", () => this.close());
+
+    document.addEventListener("keydown", (evt) => {
+      if (evt.key === "Escape") {
+        this.close();
+      }
     });
-    document.addEventListener("keydown", (evt) => this._handleEscClose(evt) );
+
+    this._popupOverlay.addEventListener("click", () => {
+      this.close();
+      console.log("desde overlay")
+    });
   }
 
 }

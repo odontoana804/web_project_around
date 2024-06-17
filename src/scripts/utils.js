@@ -1,35 +1,34 @@
-import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
-import Popup from "../components/Popup.js";
+import { popupPlace, popupProfile } from "../pages/index.js";
+
 
 //elementos que se editan en la seccion de profile
-const profileName = document.querySelector(".profile__name");
-const profileDescription = document.querySelector(".profile__description");
+export const profileName = document.querySelector(".profile__name");
+export const profileDescription = document.querySelector(".profile__description");
 
 //elementos de el popUp de edición de perfil
-const popupProfile = document.querySelector("#popup__profile");
-const popupNameProfile = popupProfile.querySelector("#name-profile");
+//const popupProfile = document.querySelector("#popup__profile");
+/* const popupNameProfile = popupProfile.querySelector("#name-profile");
 const popupAboutProfile = popupProfile.querySelector("#about-profile");
 const confirmButtonProfile = popupProfile.querySelector("#btn-submit-profile");
-const cancelButtonProfile = popupProfile.querySelector("#btn-close-profile");
+const cancelButtonProfile = popupProfile.querySelector("#btn-close-profile"); */
 const editButtonProfile = document.querySelector(".profile__edit-button");
 
 //elementos de el popUp de agregar nuevas tarjetas de lugar
-const popupPlace = document.querySelector("#popup__place");
-const popupNamePlace = popupPlace.querySelector("#name-place");
+//const popupPlace = document.querySelector("#popup__place");
+/* const popupNamePlace = popupPlace.querySelector("#name-place");
 const popupUrlPlace = popupPlace.querySelector("#url-place");
-const addButtonPlace = document.querySelector(".profile__add-button");
 const cancelButtonPlace = popupPlace.querySelector("#btn-close-place");
-const confirmButtonPlace = popupPlace.querySelector("#btn-submit-place");
+const confirmButtonPlace = popupPlace.querySelector("#btn-submit-place"); */
+const addButtonPlace = document.querySelector(".profile__add-button");
 
 //capa fondo semitrasparente de los popUps
-const popupOverlay = document.querySelector(".overlay");
+//const popupOverlay = document.querySelector(".overlay");
 
 //elementos de el popUp de visualización de imagen
-const popupImage = document.querySelector("#popup__image");
+//const popupImage = document.querySelector("#popup__image");
 
 //elemento donde se muestran las tarjetas
-export const cardsContainer = document.querySelector(".elements");
 export const cardsListSection = ".elements";
 
 export const initialCards = [
@@ -60,15 +59,15 @@ export const initialCards = [
 ];
 
 //Función para mostrar el popUp de agregar nuevas tarjetas y edición del perfil
-function showPopUp(popup, overlay) {
+/* function showPopUp(popup, overlay) {
   popup.classList.add("popup_opened");
   overlay.classList.add("overlay_opened");
   document.addEventListener("keydown", closeAnyPopUpEscapeKey);
   new FormValidator(popup).enableValidation();
-}
+} */
 
 //Función para ocultar el popUp de agregar nuevas tarjetas y edición del perfil
-function closePopUp(popup, overlay) {
+/* function closePopUp(popup, overlay) {
   popup.classList.remove("popup_opened");
   overlay.classList.remove("overlay_opened");
   document.removeEventListener("keydown", closeAnyPopUpEscapeKey);
@@ -80,41 +79,39 @@ function closePopUpImage(popup, overlay) {
   popup.classList.remove("img-popup_opened");
   overlay.classList.remove("overlay_opened");
   document.removeEventListener("keydown", closeAnyPopUpEscapeKey);
-}
+} */
 
 //Función para cerrar las ventanas popUps
-function closeAnyPopUp() {
+/* function closeAnyPopUp() {
   closePopUp(popupProfile, popupOverlay);
   closePopUp(popupPlace, popupOverlay);
   closePopUpImage(popupImage, popupOverlay);
-}
+} */
+
 
 //Función para cerrar las ventanas popUps con la tecla Escape
-function closeAnyPopUpEscapeKey(evt) {
+/* function closeAnyPopUpEscapeKey(evt) {
   if (evt.key === "Escape") {
     closeAnyPopUp();
   }
-}
+} */
 
 //Función para editar los campos del nombre del perfil y la profesión
-function editProfile(name, about) {
+/* function editProfile(name, about) {
   profileName.textContent = name;
   profileDescription.textContent = about;
-}
-
-const popupConfig = {
-  openPopupClass : "popup_opened",
-  openOverlayClass: "overlay_opened",
-  closeButtonSelector: ".popup__btn-close",
-  popupOverlay: document.querySelector(".overlay")
-}
+} */
 
 
 //abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 editButtonProfile.addEventListener("click", () => {
-  const popup = new Popup("#popup__profile", popupConfig)
-  popup.open()
-  popup.setEventListeners()
+
+  const popup = popupProfile.generatePopup()
+  popupProfile.open()
+  document.querySelector(".popup").prepend(popup)
+  new FormValidator(popup).enableValidation();
+
+
   /* showPopUp(popupProfile, popupOverlay);
   popupNameProfile.value = document.querySelector(".profile__name").textContent;
   popupAboutProfile.value = document.querySelector(
@@ -130,27 +127,33 @@ editButtonProfile.addEventListener("click", () => {
 });
  */
 //cambia el contenido de los campos de nombre y acercaDe del Profile al dar click en el botón Guardar
-confirmButtonProfile.addEventListener("click", () => {
+/* confirmButtonProfile.addEventListener("click", () => {
   editProfile(popupNameProfile.value, popupAboutProfile.value);
   closePopUp(popupProfile, popupOverlay);
-});
+}); */
 
 //abre la ventana popup Place al dar click en el icono del + (agregar)
 addButtonPlace.addEventListener("click", () => {
-  showPopUp(popupPlace, popupOverlay);
+
+  const popup = popupPlace.generatePopup()
+  popupPlace.open()
+  document.querySelector(".popup").prepend(popup)
+  new FormValidator(popup).enableValidation();
+
+  /* showPopUp(popupPlace, popupOverlay);
   popupNamePlace.value = "";
   popupUrlPlace.value = "";
-  confirmButtonPlace.classList.add("popup__btn-submit_inactive");
+  confirmButtonPlace.classList.add("popup__btn-submit_inactive"); */
 });
 
 //cierra la ventana popUp Place al dar click en el icono de X (cerrar)
-cancelButtonPlace.addEventListener("click", () => {
+/* cancelButtonPlace.addEventListener("click", () => {
   closePopUp(popupPlace, popupOverlay);
   confirmButtonPlace.classList.add("popup__btn-submit_inactive");
 });
-
+ */
 //agrega una nueva tarjeta a lugares al daer click en el botón Crear
-confirmButtonPlace.addEventListener("click", () => {
+/* confirmButtonPlace.addEventListener("click", () => {
   //se crea un nuevo objeto con los valores de los inputs
   const newCard = {
     name: popupNamePlace.value,
@@ -168,14 +171,14 @@ confirmButtonPlace.addEventListener("click", () => {
   //se inserta el obejto en el arreglo inicial
   initialCards.push(newCard);
   closePopUp(popupPlace, popupOverlay);
-});
+}); */
 
 //cierra el popup de previsualización de imagen al dar click en el icono de X (cerrar)
-popupImage.addEventListener("click", (evt) => {
+/* popupImage.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("img-popup__btn-close")) {
     closePopUpImage(popupImage, popupOverlay);
   }
-});
+}); */
 
 //cierra las ventanas popUps cuando se de click en la superposición
-popupOverlay.addEventListener("click", closeAnyPopUp);
+//popupOverlay.addEventListener("click", closeAnyPopUp);
