@@ -1,12 +1,4 @@
-const validationConfig = {
-  formSelector: ".popup__container",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__btn-submit",
-  inactiveButtonClass: "popup__btn-submit_inactive",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_active",
-  errorSelector: ".popup__input-error"
-};
+import { validationConfig } from "../utils/constants.js";
 
 export class FormValidator {
   constructor( popup, config = validationConfig ){

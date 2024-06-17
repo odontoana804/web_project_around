@@ -31,7 +31,6 @@ export default class PopupWithForms extends Popup {
     this._submitButtonSelector = submitButtonSelector;
   }
 
-
   _getInputValues() {
     this._inputList = this._popup.querySelectorAll(this._inputSelector);
     this._formValues = {};
@@ -45,7 +44,6 @@ export default class PopupWithForms extends Popup {
     document.querySelector(this._popupSelector).querySelector(this._submitButtonSelector).classList.add("popup__btn-submit_inactive");
     document.querySelector(this._popupSelector).querySelector(this._submitButtonSelector).setAttribute("disabled", true);
   }
-
 
   setEventListeners() {
     super.setEventListeners()

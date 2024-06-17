@@ -7,19 +7,12 @@ import {
   initialCards,
   cardsListSection,
   profileName,
+  popupImageConfig,
+  popupWithFormConfig,
   profileDescription,
-} from "../scripts/utils.js";
+} from "../utils/constants.js";
 
-const popupImageConfig = {
-  openPopupClass: "img-popup_opened",
-  openOverlayClass: "overlay_opened",
-  closeButtonSelector: ".img-popup__btn-close",
-  popupUbication: ".img-popup",
-  imagePreviewClass: ".img-popup__preview",
-  imageTitleClass: ".img-popup__title",
-  popupOverlay: document.querySelector(".overlay"),
-};
-
+profileDescription;
 //Función para cargar las tarjetas creadas desde el arreglo inicial
 const cardsList = new Section(
   {
@@ -59,18 +52,10 @@ const cardsList = new Section(
 //renderizar las 6 tarjetas iniciales
 cardsList.renderItems();
 
-const popupWithFormConfig = {
-  openPopupClass: "popup_opened",
-  openOverlayClass: "overlay_opened",
-  closeButtonSelector: ".popup__btn-close",
-  popupUbication: ".popup",
-  popupOverlay: document.querySelector(".overlay"),
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__btn-submit",
-};
-
+//crea instancia de la clase UserInfo
 export const userInfo = new UserInfo(profileName, profileDescription);
 
+//crea instancia de la clase PopupWithForms para el popup del perfil
 export const popupProfile = new PopupWithForms(
   "#popupProfileTemplate",
   "#popup__profile",
@@ -81,6 +66,7 @@ export const popupProfile = new PopupWithForms(
   }
 );
 
+//crea instancia de la clase PopupWithForms para el popup de agregar lugar
 export const popupPlace = new PopupWithForms(
   "#popupPlaceTemplate",
   "#popup__place",
@@ -96,7 +82,6 @@ export const popupPlace = new PopupWithForms(
           image: evt.target.currentSrc,
         }
       );
-
       const popup = popupImage.generatePopup();
       popupImage.open();
       document.querySelector(popupImageConfig.popupUbication).prepend(popup);
