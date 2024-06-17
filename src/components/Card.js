@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
   constructor( data, cardSelector, array, handleCardClick) {
     this._id = this._createUniqueId()
     this._name = data.name;
@@ -38,7 +38,6 @@ export class Card {
           (element) => element.id === evt.target.previousElementSibling.id
         );
         this._array.splice(indiceEliminar, 1);
-        console.log(this._array)
       };
     });
   };
@@ -47,7 +46,6 @@ export class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-
     this._element.querySelector(".elements__card-photo-imagen").src = this._url;
     this._element.querySelector(".elements__card-photo-imagen").alt = this._name;
     this._element.querySelector(".elements__card-photo-imagen").setAttribute("id", this._id );

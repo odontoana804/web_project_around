@@ -1,3 +1,12 @@
+import liberty from "../images/estatua-de-la-libertad.jpg";
+import goldenGate from "../images/Golden-Gate-Bridge.jpg";
+import niagaraFalls from "../images/Cataratas-del-niagara.jpg";
+import rushmore from "../images/monte-rushmore.jpg";
+import spaceNeddle from "../images/space-neddle.jpg";
+import empireState from "../images/empire-state-building.jpg";
+
+
+
 //elementos que se editan en la seccion de profile
 export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(".profile__description");
@@ -9,32 +18,32 @@ export const editButtonProfile = document.querySelector(".profile__edit-button")
 export const addButtonPlace = document.querySelector(".profile__add-button");
 
 //selector de elemento donde se muestran las tarjetas
-export const cardsListSection = ".elements";
+export const cardsListSelector = ".elements";
 
 export const initialCards = [
   {
     name: "Estatua de la libertad",
-    url: "./images/estatua-de-la-libertad.jpg",
+    url: liberty,
   },
   {
     name: "Golden Gate Bridge",
-    url: "./images/Golden-Gate-Bridge.jpg",
+    url: goldenGate,
   },
   {
     name: "Cataratas del Niágara",
-    url: "./images/Cataratas-del-niagara.jpg",
+    url: niagaraFalls,
   },
   {
     name: "Monte Rushmore",
-    url: "./images/monte-rushmore.jpg",
+    url: rushmore,
   },
   {
     name: "Space Neddle",
-    url: "./images/space-neddle.jpg",
+    url: spaceNeddle,
   },
   {
     name: "Empire State Building",
-    url: "./images/empire-state-building.jpg",
+    url: empireState,
   },
 ];
 

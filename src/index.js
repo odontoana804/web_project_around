@@ -1,18 +1,19 @@
-import { Card } from "../components/Card.js";
-import PopupWithForms from "../components/PopupWithForms.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-import Section from "../components/Section.js";
-import { UserInfo } from "../components/UserInfo.js";
+import "./pages/index.css";
+import Card from "./components/Card.js";
+import PopupWithForms from "./components/PopupWithForms.js";
+import PopupWithImage from "./components/PopupWithImage.js";
+import Section from "./components/Section.js";
+import UserInfo from "./components/UserInfo.js";
 import {
   initialCards,
-  cardsListSection,
+  cardsListSelector,
   profileName,
   popupImageConfig,
   popupWithFormConfig,
   profileDescription,
-} from "../utils/constants.js";
+} from "./utils/constants.js";
+import { addButtonAction, editButtonAction } from "./utils/utils.js";
 
-profileDescription;
 //Función para cargar las tarjetas creadas desde el arreglo inicial
 const cardsList = new Section(
   {
@@ -40,13 +41,11 @@ const cardsList = new Section(
         }
       );
       initialCard.id = card._id;
-
       const cardElement = card.generateCard();
-
       cardsList.setItem(cardElement);
     },
   },
-  cardsListSection
+  cardsListSelector
 );
 
 //renderizar las 6 tarjetas iniciales
@@ -93,3 +92,9 @@ export const popupPlace = new PopupWithForms(
     popupPlace.close();
   }
 );
+
+//ejecución de función que abre la ventana popup Profile al dar click en el icono del lápiz (editar)
+editButtonAction();
+
+//ejecución de función que abre la ventana popup Place al dar click en el icono del + (agregar)
+addButtonAction();

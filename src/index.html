@@ -6,7 +6,6 @@
     <meta name="description" content="Página web Around the US" />
     <meta name="keywords" content="HTML, CSS, JavaScript" />
     <meta name="author" content="Ana Maria Vargas" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="shortcut icon" href="favicon.ico" />
     <title>Alrededor de los EEUU</title>
   </head>
@@ -14,7 +13,7 @@
     <div class="page">
       <header class="header">
         <img
-          src="./images/logo_around-the-us.svg"
+          src="<%= require('./images/logo_around-the-us.svg')%>"
           alt="Around Th US logo"
           class="header__logo"
         />
@@ -28,7 +27,7 @@
 
       <main class="content">
         <section class="profile">
-          <img src="./images/avatar.jpg" alt="avatar" class="profile__avatar" />
+          <img src="<%= require('./images/avatar.jpg')%>" alt="avatar" class="profile__avatar" />
           <div class="profile__info">
             <div class="profile__info-container">
               <h1 class="profile__name">Jacques Cousteau</h1>
@@ -147,9 +146,5 @@
       </div>
     </template>
 
-    <script type="module" src="./pages/index.js"></script>
-    <script type="module" src="./utils/utils.js"></script>
-    <script type="module" src="./components/Card.js"></script>
-    <script type="module" src="./components/FormValidator.js"></script>
   </body>
 </html>

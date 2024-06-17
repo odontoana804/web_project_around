@@ -8,6 +8,8 @@ Cada que el usuario añade o elimina una nueva tarjeta, los cambios se ven refle
 
 Los formularios de las ventanas modales cuentan con validación en tiempo real, que muestra los mensajes de error mientras que el usuario está completando los campos. Si alguno de los campos no esta completado correctamente el botón de guardar permanecerá desactivado. Una vez todos los campos esten llenos de la manera correcta, el botón de guardar cambia su estado y su estilo para quedar activo.
 
+La página web se empaqueta con WebPack
+
 La página web esta desplegada en Github Pages y se aloja en el siguiente link:
 https://odontoana804.github.io/web_project_around/
 

@@ -1,6 +1,6 @@
 import { validationConfig } from "../utils/constants.js";
 
-export class FormValidator {
+export default class FormValidator {
   constructor( popup, config = validationConfig ){
     this._config = config
     this._popup = popup.querySelector(this._config.formSelector);
