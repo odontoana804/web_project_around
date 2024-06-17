@@ -13,6 +13,9 @@ La página web se empaqueta con WebPack
 La página web esta desplegada en Github Pages y se aloja en el siguiente link:
 https://odontoana804.github.io/web_project_around/
 
+También se alojaen este link de netlify:
+https://6670ca2f9ffe9b71e981a914--dapper-arithmetic-dfa643.netlify.app/
+
 Planes de mejora para el futuro: Almacenar los datos de las tarjetas en una base de datos.
 
 Página Web diseñada por Ana María Vargas.
