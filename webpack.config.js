@@ -1,4 +1,3 @@
-// webpack.config.js
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -24,14 +23,10 @@ module.exports = {
     open: true
   },
   module: {
-    rules: [ // esto es un array de reglas
-      // añádele un objeto que contenga reglas para Babel
+    rules: [
       {
-        // una expresión regular que busca todos los archivos js
         test: /\.js$/,
-        // todos los archivos deben ser procesados por babel-loader
         loader: "babel-loader",
-        // excluye la carpeta node_modules, no necesitamos procesar archivos en ella
         exclude: "/node_modules/"
       },
       {
@@ -48,7 +43,6 @@ module.exports = {
         ],
       },
       {
-        // añade la regla para el procesamiento de archivos
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
         type: "asset/resource"
       },
@@ -56,9 +50,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html" // ruta a nuestro archivo index.html
+      template: "./src/index.html"
     }),
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin() // conecta el plugin para fusionar archivos CSS
+    new MiniCssExtractPlugin()
   ]
 }
