@@ -76,3 +76,12 @@ export const popupWithFormConfig = {
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__btn-submit",
 };
+
+export const popupConfirmationConfig = {
+  openPopupClass: "confirmation-popup_opened",
+  openOverlayClass: "overlay_opened",
+  closeButtonSelector: ".confirmation-popup__btn-close",
+  popupUbication: ".confirmation-popup",
+  popupOverlay: document.querySelector(".overlay"),
+  submitButtonSelector: ".confirmation-popup__btn-submit",
+};

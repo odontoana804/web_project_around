@@ -10,9 +10,11 @@ import {
   profileName,
   popupImageConfig,
   popupWithFormConfig,
+  popupConfirmationConfig,
   profileDescription,
 } from "./utils/constants.js";
 import { addButtonAction, editButtonAction } from "./utils/utils.js";
+import ConfirmationPopup from "./components/ConfirmationPopup.js";
 
 //Función para cargar las tarjetas creadas desde el arreglo inicial
 const cardsList = new Section(
@@ -22,7 +24,7 @@ const cardsList = new Section(
       const card = new Card(
         initialCard,
         "#card-template",
-        initialCards,
+        /* initialCards, */
         (evt) => {
           const popupImage = new PopupWithImage(
             "#popupImageTemplate",
@@ -38,6 +40,26 @@ const cardsList = new Section(
           document
             .querySelector(popupImageConfig.popupUbication)
             .prepend(popup);
+        },
+        (evt) => {
+          const confirmationPopup = new ConfirmationPopup(
+            "#popupConfirmationTemplate",
+            "#popup__confirmation",
+            popupConfirmationConfig,
+            () => {
+              evt.target.closest(".elements__card").remove();
+              let indiceEliminar = initialCards.findIndex(
+                (element) => element.id === evt.target.previousElementSibling.id
+              );
+              initialCards.splice(indiceEliminar, 1);
+              confirmationPopup.close();
+            }
+          )
+          const popup = confirmationPopup.generatePopup()
+          confirmationPopup.open();
+          document
+          .querySelector(popupConfirmationConfig.popupUbication)
+          .prepend(popup);
         }
       );
       initialCard.id = card._id;
@@ -71,20 +93,45 @@ export const popupPlace = new PopupWithForms(
   "#popup__place",
   popupWithFormConfig,
   (formData) => {
-    const card = new Card(formData, "#card-template", initialCards, (evt) => {
-      const popupImage = new PopupWithImage(
-        "#popupImageTemplate",
-        "#popup__image",
-        popupImageConfig,
-        {
-          name: evt.target.alt,
-          image: evt.target.currentSrc,
-        }
-      );
-      const popup = popupImage.generatePopup();
-      popupImage.open();
-      document.querySelector(popupImageConfig.popupUbication).prepend(popup);
-    });
+    const card = new Card(
+      formData,
+      "#card-template",
+      /* initialCards, */
+      (evt) => {
+        const popupImage = new PopupWithImage(
+          "#popupImageTemplate",
+          "#popup__image",
+          popupImageConfig,
+          {
+            name: evt.target.alt,
+            image: evt.target.currentSrc,
+          }
+        );
+        const popup = popupImage.generatePopup();
+        popupImage.open();
+        document.querySelector(popupImageConfig.popupUbication).prepend(popup);
+      },
+      (evt) => {
+        const confirmationPopup = new ConfirmationPopup(
+          "#popupConfirmationTemplate",
+          "#popup__confirmation",
+          popupConfirmationConfig,
+          () => {
+            evt.target.closest(".elements__card").remove();
+            let indiceEliminar = initialCards.findIndex(
+              (element) => element.id === evt.target.previousElementSibling.id
+            );
+            initialCards.splice(indiceEliminar, 1);
+            confirmationPopup.close();
+          }
+        )
+        const popup = confirmationPopup.generatePopup()
+        confirmationPopup.open();
+        document
+        .querySelector(popupConfirmationConfig.popupUbication)
+        .prepend(popup);
+      }
+    );
     formData.id = card._id;
     initialCards.push(formData);
     const cardElement = card.generateCard();

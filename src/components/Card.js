@@ -1,11 +1,12 @@
 export default class Card {
-  constructor( data, cardSelector, array, handleCardClick) {
+  constructor( data, cardSelector, /* array, */ handleCardClick, handleDeleteClick) {
     this._id = this._createUniqueId()
     this._name = data.name;
     this._url = data.url;
     this._cardSelector = cardSelector;
-    this._array = array;
+    /* this._array = array; */
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
   };
 
   _createUniqueId () {
@@ -33,11 +34,12 @@ export default class Card {
       };
       //evento para funcionalidad del boton de eliminar
       if (evt.target.classList.contains("elements__card-btn-trash")){
-        evt.target.closest(".elements__card").remove();
+        /* evt.target.closest(".elements__card").remove();
         let indiceEliminar = this._array.findIndex(
           (element) => element.id === evt.target.previousElementSibling.id
         );
-        this._array.splice(indiceEliminar, 1);
+        this._array.splice(indiceEliminar, 1); */
+        this._handleDeleteClick(evt)
       };
     });
   };
