@@ -23,6 +23,8 @@
 
       <div class="popup"></div>
 
+      <div class="confirmation-popup"></div>
+
       <div class="img-popup"></div>
 
       <main class="content">
@@ -131,6 +133,25 @@
         </button>
       </form>
     </template>
+
+    <template id="popupConfirmationTemplate">
+      <form  class="confirmation-popup__container" id="popup__confirmation">
+        <p class="confirmation-popup__title">¿Estás seguro?</p>
+        <button
+          class="confirmation-popup__btn-close"
+          id="btn-close-confirmation"
+          type="reset"
+        ></button>
+        <button
+          class="confirmation-popup__btn-submit"
+          id="btn-submit-confirmation"
+          type="submit"
+        >
+          Si
+        </button>
+      </form>
+    </template>
+
 
     <template id="popupImageTemplate">
       <div id="popup__image">

@@ -45,8 +45,8 @@ export default class PopupWithForms extends Popup {
     document.querySelector(this._popupSelector).querySelector(this._submitButtonSelector).setAttribute("disabled", true);
   }
 
-  setEventListeners() {
-    super.setEventListeners()
+  _setEventListeners() {
+    super._setEventListeners()
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());

@@ -25,7 +25,7 @@ export default class Popup {
 
   generatePopup() {
     this._popup = this._getTemplate();
-    this.setEventListeners();
+    this._setEventListeners();
     return this._popup;
   };
 
@@ -40,7 +40,7 @@ export default class Popup {
     this._popup.closest(this._popupSelector).remove();
   }
 
-  setEventListeners() {
+  _setEventListeners() {
     this._popup.querySelector(this._closeButtonSelector).addEventListener("click", () => this.close());
 
     document.addEventListener("keydown", (evt) => {
