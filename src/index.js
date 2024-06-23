@@ -8,12 +8,14 @@ import {
   initialCards,
   cardsListSelector,
   profileName,
+  profileAvatarImage,
   popupImageConfig,
   popupWithFormConfig,
   popupConfirmationConfig,
-  profileDescription,
+  popupAvatarConfig,
+  profileDescription
 } from "./utils/constants.js";
-import { addButtonAction, editButtonAction } from "./utils/utils.js";
+import { addButtonAction, editAvatarAction, editAvatarHover, editButtonAction } from "./utils/utils.js";
 import ConfirmationPopup from "./components/ConfirmationPopup.js";
 
 //Función para cargar las tarjetas creadas desde el arreglo inicial
@@ -125,7 +127,7 @@ export const popupPlace = new PopupWithForms(
             confirmationPopup.close();
           }
         )
-        const popup = confirmationPopup.generatePopup()
+        const popup = confirmationPopup.generatePopup();
         confirmationPopup.open();
         document
         .querySelector(popupConfirmationConfig.popupUbication)
@@ -140,8 +142,25 @@ export const popupPlace = new PopupWithForms(
   }
 );
 
+//crea instancia de la clase PopupWithForms para el popup de editar imagen de Avatar
+export const popupAvatar = new PopupWithForms (
+  "#popupAvatarTemplate",
+  "#popup__avatar",
+  popupAvatarConfig,
+  (formData) => {
+    profileAvatarImage.src = formData.avatar;
+    popupAvatar.close();
+  }
+)
+
 //ejecución de función que abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 editButtonAction();
 
 //ejecución de función que abre la ventana popup Place al dar click en el icono del + (agregar)
 addButtonAction();
+
+//ejeución de función que muestra el botón de editar el avatar
+editAvatarHover();
+
+//ejeución de función que abre la ventana popup de editar Avatar al dar click en la imagén de perfil
+editAvatarAction();

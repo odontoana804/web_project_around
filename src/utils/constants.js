@@ -10,6 +10,9 @@ import empireState from "../images/empire-state-building.jpg";
 //elementos que se editan en la seccion de profile
 export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(".profile__description");
+export const profileAvatar = document.querySelector(".profile__avatar-container");
+export const profileAvatarEditButton = document.querySelector("#avatarEditButton");
+export const profileAvatarImage = document.querySelector(".profile__avatar-image");
 
 //elementos de el popUp de edición de perfil
 export const editButtonProfile = document.querySelector(".profile__edit-button");
@@ -84,4 +87,24 @@ export const popupConfirmationConfig = {
   popupUbication: ".confirmation-popup",
   popupOverlay: document.querySelector(".overlay"),
   submitButtonSelector: ".confirmation-popup__btn-submit",
+};
+
+export const popupAvatarConfig = {
+  openPopupClass: "avatar-popup_opened",
+  openOverlayClass: "overlay_opened",
+  closeButtonSelector: ".avatar-popup__btn-close",
+  popupUbication: ".avatar-popup",
+  popupOverlay: document.querySelector(".overlay"),
+  inputSelector: ".avatar-popup__input",
+  submitButtonSelector: ".avatar-popup__btn-submit",
+};
+
+export const avatarValidationConfig = {
+  formSelector: ".avatar-popup__container",
+  inputSelector: ".avatar-popup__input",
+  submitButtonSelector: ".avatar-popup__btn-submit",
+  inactiveButtonClass: "avatar-popup__btn-submit_inactive",
+  inputErrorClass: "avatar-popup__input_type_error",
+  errorClass: "avatar-popup__input-error_active",
+  errorSelector: ".avatar-popup__input-error"
 };

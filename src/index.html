@@ -25,11 +25,16 @@
 
       <div class="confirmation-popup"></div>
 
+      <div class="avatar-popup"></div>
+
       <div class="img-popup"></div>
 
       <main class="content">
         <section class="profile">
-          <img src="<%= require('./images/avatar.jpg')%>" alt="avatar" class="profile__avatar" />
+          <div class="profile__avatar-container">
+            <img src="<%= require('./images/avatar.jpg')%>" alt="avatar" class="profile__avatar-image"/>
+            <span id="avatarEditButton"></span>
+          </div>
           <div class="profile__info">
             <div class="profile__info-container">
               <h1 class="profile__name">Jacques Cousteau</h1>
@@ -152,6 +157,28 @@
       </form>
     </template>
 
+    <template id="popupAvatarTemplate">
+      <form class="avatar-popup__container" id="popup__avatar" novalidate>
+        <p class="avatar-popup__title">Cambiar foto de perfil</p>
+        <input
+          class="avatar-popup__input"
+          placeholder="Enlace a la imagen"
+          type="url"
+          id="url-avatar"
+          required
+          name="avatar"
+        />
+        <span class="avatar-popup__input-error url-avatar-input-error"></span>
+        <button
+          class="avatar-popup__btn-close"
+          id="btn-close-avatar"
+          type="reset"
+        ></button>
+        <button class="avatar-popup__btn-submit" id="btn-submit-avatar" type="submit">
+          Guardar
+        </button>
+      </form>
+    </template>
 
     <template id="popupImageTemplate">
       <div id="popup__image">
