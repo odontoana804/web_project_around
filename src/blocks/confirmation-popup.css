@@ -54,18 +54,60 @@
 
 .confirmation-popup__btn-close {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  left: 430px;
-  top: -47px;
-  background-image: url("../images/Close-Icon.png");
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  left: 433px;
+  top: -37px;
+  background-image: url("../images/Close-Icon.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
+  background-size: 30px;
   border: none;
   cursor: pointer;
 }
 
 .confirmation-popup__btn-close:hover {
   opacity: 0.6;
+}
+
+
+@media screen and (max-width: 920px) and (max-height: 420px) {
+  .confirmation-popup {
+    height: 170px;
+  }
+  .confirmation-popup_opened {
+    top: calc((100vh - 170px) / 2);
+  }
+  .confirmation-popup__about {
+    margin-bottom: 25px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .confirmation-popup {
+    width: 282px;
+    height: 170px;
+  }
+
+  .confirmation-popup__container {
+    width: 238px;
+  }
+
+  .confirmation-popup__title {
+    font-size: 18px;
+  }
+
+  .confirmation-popup__btn-submit {
+    font-size: 14px;
+  }
+
+  .confirmation-popup__btn-close {
+    width: 26px;
+    height: 26px;
+    left: 256px;
+    top: -38px;
+    background-size: 26px;
+  }
 }

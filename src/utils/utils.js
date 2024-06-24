@@ -5,8 +5,8 @@ import {
   editButtonProfile,
   profileAvatar,
   profileAvatarEditButton,
+  validationConfig,
   avatarValidationConfig,
-  validationConfig
 } from "./constants.js";
 //función que abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 export const editButtonAction = () => {
@@ -33,16 +33,16 @@ export const addButtonAction = () => {
 //función que muestra el botón de editar el avatar
 export const editAvatarHover = () => {
   profileAvatar.addEventListener("mouseover", () => {
-    profileAvatarEditButton.classList.add("profile__avatar-edit");
+    profileAvatarEditButton.classList.add("profile__avatar-edit_shown");
   });
   profileAvatar.addEventListener("mouseout", () => {
-    profileAvatarEditButton.classList.remove("profile__avatar-edit");
+    profileAvatarEditButton.classList.remove("profile__avatar-edit_shown");
   });
 };
 
 //función que abre la ventana popup de editar Avatar al dar click en la imagén de perfil
 export const editAvatarAction = () => {
-  profileAvatar.addEventListener("click", () => {
+  profileAvatarEditButton.addEventListener("click", () => {
     const popup = popupAvatar.generatePopup();
     popupAvatar.open();
     document.querySelector(".avatar-popup").prepend(popup);

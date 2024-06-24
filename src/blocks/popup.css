@@ -102,14 +102,16 @@
 
 .popup__btn-close {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  left: 430px;
-  top: -47px;
-  background-image: url("../images/Close-Icon.png");
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  left: 433px;
+  top: -37px;
+  background-image: url("../images/Close-Icon.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
+  background-size: 30px;
   border: none;
   cursor: pointer;
 }
@@ -131,7 +133,7 @@
 
   .popup__btn-close {
     top: 7px;
-    left: 435px;
+    left: 437px;
   }
 }
 
@@ -157,6 +159,7 @@
     width: 26px;
     height: 26px;
     left: 256px;
-    top: -47px;
+    top: -38px;
+    background-size: 26px;
   }
 }

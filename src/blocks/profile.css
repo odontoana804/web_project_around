@@ -15,22 +15,26 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .profile__avatar-edit{
+  display: none;
   position: absolute;
   border-radius: 50%;
-  top: calc((100% - 120px) / 2);
-  left: calc((100% - 120px) / 2);
   height: 120px;
   width: 120px;
-  background-image: url("../images/Edit-Button.png");
+  background-image: url("../images/Edit-Button.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-color: #000000;
   opacity: 0.8;
   background-size: 26px;
   cursor: pointer;
+}
+
+.profile__avatar-edit_shown{
+  display: flex;
 }
 
 .profile__info {
@@ -72,10 +76,11 @@
   height: 24px;
   width: 24px;
   padding: 0;
-  background-image: url("../images/Edit-Button.png");
+  background-image: url("../images/Edit-Button.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
+  background-size: 10px;
   border: 1px solid #ffffff;
   cursor: pointer;
 }
@@ -88,7 +93,7 @@
   width: 150px;
   height: 50px;
   box-sizing: border-box;
-  background-image: url("../images/add-button.png");
+  background-image: url("../images/add-button.svg");
   background-position: center;
   background-repeat: no-repeat;
   padding: 0;
@@ -101,6 +106,7 @@
 .profile__add-button:hover {
   opacity: 0.6;
 }
+
 @media screen and (max-width: 920px) {
   .profile {
     grid-template-columns: 120px auto;
@@ -161,5 +167,31 @@
 
   .profile__add-button {
     width: 282px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .profile__avatar-edit{
+    display: flex;
+    top: 5px;
+    right: 5px;
+    height: 24px;
+    width: 24px;
+    background-size: 10px;
+    border: #ffffff solid 1px;
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 920px) and (max-height: 420px) {
+  .profile__avatar-edit{
+    display: flex;
+    top: 5px;
+    right: 5px;
+    height: 24px;
+    width: 24px;
+    background-size: 10px;
+    border: #ffffff solid 1px;
+    opacity: 1;
   }
 }

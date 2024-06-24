@@ -36,7 +36,7 @@
   width: 21px;
   height: 19px;
   background-color: transparent;
-  background-image: url("../images/hearth-white.png");
+  background-image: url("../images/hearth-white.svg");
   background-position: center;
   background-repeat: no-repeat;
   padding: 0;
@@ -51,7 +51,7 @@
 }
 
 .elements__card-btn-hearth_active {
-  background-image: url("../images/hearth-black.png");
+  background-image: url("../images/hearth-black.svg");
 }
 
 .elements__card-btn-trash {
@@ -61,7 +61,7 @@
   width: 18px;
   height: 19.3px;
   background-color: transparent;
-  background-image: url("../images/Trash.png");
+  background-image: url("../images/Trash.svg");
   background-position: center;
   background-repeat: no-repeat;
   border: none;

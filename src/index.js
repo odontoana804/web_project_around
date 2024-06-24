@@ -151,7 +151,7 @@ export const popupAvatar = new PopupWithForms (
     profileAvatarImage.src = formData.avatar;
     popupAvatar.close();
   }
-)
+);
 
 //ejecución de función que abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 editButtonAction();
