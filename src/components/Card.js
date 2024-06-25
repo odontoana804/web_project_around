@@ -1,16 +1,17 @@
 export default class Card {
   constructor( data, cardSelector, handleCardClick, handleDeleteClick) {
-    this._id = this._createUniqueId()
+   // this._id = this._createUniqueId()
+    this._id = data._id
     this._name = data.name;
-    this._url = data.url;
+    this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
   };
 
-  _createUniqueId () {
+ /*  _createUniqueId () {
     return Math.floor(Math.random() * new Date().getTime() * 3).toString();
-  };
+  }; */
 
   //función para clonar la plantilla
   _getTemplate() {
@@ -42,7 +43,7 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector(".elements__card-photo-imagen").src = this._url;
+    this._element.querySelector(".elements__card-photo-imagen").src = this._link;
     this._element.querySelector(".elements__card-photo-imagen").alt = this._name;
     this._element.querySelector(".elements__card-photo-imagen").setAttribute("id", this._id );
     this._element.querySelector(".elements__card-title").textContent = this._name;
