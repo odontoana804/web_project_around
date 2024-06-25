@@ -26,7 +26,6 @@ const cardsList = new Section(
       const card = new Card(
         initialCard,
         "#card-template",
-        /* initialCards, */
         (evt) => {
           const popupImage = new PopupWithImage(
             "#popupImageTemplate",
@@ -98,7 +97,6 @@ export const popupPlace = new PopupWithForms(
     const card = new Card(
       formData,
       "#card-template",
-      /* initialCards, */
       (evt) => {
         const popupImage = new PopupWithImage(
           "#popupImageTemplate",

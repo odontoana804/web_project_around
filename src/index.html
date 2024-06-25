@@ -33,7 +33,7 @@
         <section class="profile">
           <div class="profile__avatar-container">
             <img src="<%= require('./images/avatar.jpg')%>" alt="avatar" class="profile__avatar-image"/>
-            <span class="profile__avatar-edit" id="avatarEditButton"></span>
+            <button class="profile__avatar-edit" id="avatarEditButton"></button>
           </div>
           <div class="profile__info">
             <div class="profile__info-container">
@@ -60,7 +60,10 @@
         </div>
         <div class="elements__card-info">
           <p class="elements__card-title"></p>
-          <button class="elements__card-btn-hearth"></button>
+          <div class="elements__card-like-container">
+            <button class="elements__card-btn-hearth"></button>
+            <p class="elements__card-likes-counter">0</p>
+          </div>
         </div>
       </div>
     </template>

@@ -5,8 +5,6 @@ import rushmore from "../images/monte-rushmore.jpg";
 import spaceNeddle from "../images/space-neddle.jpg";
 import empireState from "../images/empire-state-building.jpg";
 
-
-
 //elementos que se editan en la seccion de profile
 export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(".profile__description");
