@@ -93,7 +93,30 @@ export class Api {
     .catch((err) => {
       console.log(err);
     });
-}
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`)
+    })
+    .then((data) => {
+      console.log(data); //todo borrar
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+
+
+  }
 
   /* setUserAvatar(data) {
     return fetch(`${this._baseUrl}users/me/avatar`, {

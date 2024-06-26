@@ -1,10 +1,3 @@
-/* import liberty from "../images/estatua-de-la-libertad.jpg";
-import goldenGate from "../images/Golden-Gate-Bridge.jpg";
-import niagaraFalls from "../images/Cataratas-del-niagara.jpg";
-import rushmore from "../images/monte-rushmore.jpg";
-import spaceNeddle from "../images/space-neddle.jpg";
-import empireState from "../images/empire-state-building.jpg"; */
-
 //elementos que se editan en la seccion de profile
 export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(".profile__description");
@@ -20,33 +13,6 @@ export const addButtonPlace = document.querySelector(".profile__add-button");
 
 //selector de elemento donde se muestran las tarjetas
 export const cardsListSelector = ".elements";
-
-/* export const initialCards = [
-  {
-    name: "Estatua de la libertad",
-    link: liberty,
-  },
-  {
-    name: "Golden Gate Bridge",
-    link: goldenGate,
-  },
-  {
-    name: "Cataratas del Niágara",
-    link: niagaraFalls,
-  },
-  {
-    name: "Monte Rushmore",
-    link: rushmore,
-  },
-  {
-    name: "Space Neddle",
-    link: spaceNeddle,
-  },
-  {
-    name: "Empire State Building",
-    link: empireState,
-  },
-]; */
 
 export const validationConfig = {
   formSelector: ".popup__container",

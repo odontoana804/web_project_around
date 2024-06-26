@@ -66,14 +66,12 @@
   background-repeat: no-repeat;
   border: none;
   transition: 0.3s;
-
 }
 
 .elements__card-btn-trash:hover {
   opacity: 0.6;
   cursor: pointer;
   transform: scale(1.3);
-
 }
 
 .elements__card-info {

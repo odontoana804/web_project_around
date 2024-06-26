@@ -5,7 +5,6 @@ import PopupWithImage from "./components/PopupWithImage.js";
 import Section from "./components/Section.js";
 import UserInfo from "./components/UserInfo.js";
 import {
-  //initialCards,
   cardsListSelector,
   profileName,
   profileAvatarImage,
@@ -37,7 +36,6 @@ export const popupProfile = new PopupWithForms(
   "#popup__profile",
   popupWithFormConfig,
   (formData) => {
-    //userInfo.setUserInfo(formData);
     apiInstance.setUserInfo(formData).then(data => {
       userInfo.setUserInfo(data);
     })
@@ -80,12 +78,7 @@ export const popupPlace = new PopupWithForms(
             popupConfirmationConfig,
             () => {
               evt.target.closest(".elements__card").remove();
-
-            /*  let indiceEliminar = initialCards.findIndex(
-                (element) => element.id === evt.target.previousElementSibling.id
-              );
-              initialCards.splice(indiceEliminar, 1); */
-
+              apiInstance.deleteCard(evt.target.previousElementSibling.id)
               confirmationPopup.close();
             }
           )
@@ -96,14 +89,8 @@ export const popupPlace = new PopupWithForms(
           .prepend(popup);
         }
       );
-
-      /*  formData.id = card._id;
-        initialCards.push(formData); */
-
       const cardElement = card.generateCard();
       document.querySelector(cardsListSelector).prepend(cardElement)
-      //cardsList.setItem(cardElement);
-      //popupPlace.close();
     })
     .then(
       popupPlace.close()
@@ -156,10 +143,7 @@ apiInstance.getInitialCards().then(data => {
               popupConfirmationConfig,
               () => {
                 evt.target.closest(".elements__card").remove();
-              /*   let indiceEliminar = initialCards.findIndex(
-                  (element) => element.id === evt.target.previousElementSibling.id
-                );
-                initialCards.splice(indiceEliminar, 1); */
+                apiInstance.deleteCard(evt.target.previousElementSibling.id)
                 confirmationPopup.close();
               }
             )
@@ -170,7 +154,6 @@ apiInstance.getInitialCards().then(data => {
             .prepend(popup);
           }
         );
-        //initialCard.id = card._id;
         const cardElement = card.generateCard();
         cardsList.setItem(cardElement);
       },
@@ -185,9 +168,7 @@ apiInstance.getInitialCards().then(data => {
 //ejecuta función para obtener datos del perfil de usuario desde servidor y renderizarlos
 apiInstance.getUserInfo().then(data => {
   userInfo.setUserInfo(data);
-})
-
-
+});
 
 //ejecución de función que abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 editButtonAction();

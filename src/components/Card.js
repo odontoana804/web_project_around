@@ -1,9 +1,10 @@
 export default class Card {
   constructor( data, cardSelector, handleCardClick, handleDeleteClick) {
-    this._id = data._id
+    this._cardId = data._id
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length;
+    this._ownerId = data.owner._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
@@ -42,9 +43,11 @@ export default class Card {
     this._element.querySelector(".elements__card-photo-imagen").src = this._link;
     this._element.querySelector(".elements__card-photo-imagen").alt = this._name;
     this._element.querySelector(".elements__card-likes-counter").textContent = this._likes;
-    this._element.querySelector(".elements__card-photo-imagen").setAttribute("id", this._id );
+    this._element.querySelector(".elements__card-photo-imagen").setAttribute("id", this._cardId );
     this._element.querySelector(".elements__card-title").textContent = this._name;
-
+    if (this._ownerId !== "95360503a2d4a266f1fa94e5") {
+      this._element.querySelector(".elements__card-btn-trash").remove();
+    }
     return this._element;
   };
 };
