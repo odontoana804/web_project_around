@@ -1,21 +1,21 @@
 import "./pages/index.css";
-import Card from "./components/Card.js";
-import PopupWithForms from "./components/PopupWithForms.js";
+/* import Card from "./components/Card.js";
 import PopupWithImage from "./components/PopupWithImage.js";
-import Section from "./components/Section.js";
+import ConfirmationPopup from "./components/ConfirmationPopup.js";
+import Section from "./components/Section.js"; */
+import PopupWithForms from "./components/PopupWithForms.js";
 import UserInfo from "./components/UserInfo.js";
 import {
-  cardsListSelector,
   profileName,
   profileAvatarImage,
+ /*  cardsListSelector,
   popupImageConfig,
+  popupConfirmationConfig, */
   popupWithFormConfig,
-  popupConfirmationConfig,
   popupAvatarConfig,
   profileDescription
 } from "./utils/constants.js";
-import { addButtonAction, editAvatarAction, editAvatarHover, editButtonAction } from "./utils/utils.js";
-import ConfirmationPopup from "./components/ConfirmationPopup.js";
+import { addButtonAction, clearCardList, editAvatarAction, editAvatarHover, editButtonAction, renderCards } from "./utils/utils.js";
 import { Api } from "./components/Api.js";
 
 //crea instancia de la clase Api
@@ -51,47 +51,13 @@ export const popupPlace = new PopupWithForms(
   "#popup__place",
   popupWithFormConfig,
   (formData) => {
-
     apiInstance.addNewCard(formData)
-    .then((formData)=> {
-      const card = new Card(
-        formData,
-        "#card-template",
-        (evt) => {
-          const popupImage = new PopupWithImage(
-            "#popupImageTemplate",
-            "#popup__image",
-            popupImageConfig,
-            {
-              name: evt.target.alt,
-              image: evt.target.currentSrc,
-            }
-          );
-          const popup = popupImage.generatePopup();
-          popupImage.open();
-          document.querySelector(popupImageConfig.popupUbication).prepend(popup);
-        },
-        (evt) => {
-          const confirmationPopup = new ConfirmationPopup(
-            "#popupConfirmationTemplate",
-            "#popup__confirmation",
-            popupConfirmationConfig,
-            () => {
-              evt.target.closest(".elements__card").remove();
-              apiInstance.deleteCard(evt.target.previousElementSibling.id)
-              confirmationPopup.close();
-            }
-          )
-          const popup = confirmationPopup.generatePopup();
-          confirmationPopup.open();
-          document
-          .querySelector(popupConfirmationConfig.popupUbication)
-          .prepend(popup);
-        }
-      );
-      const cardElement = card.generateCard();
-      document.querySelector(cardsListSelector).prepend(cardElement)
-    })
+    .then(
+      clearCardList()
+    )
+    .then(
+      renderCards()
+    )
     .then(
       popupPlace.close()
     )
@@ -109,67 +75,14 @@ export const popupAvatar = new PopupWithForms (
   }
 );
 
-//ejecuta función para obtener datos de las tarjetas desde el servidor
-apiInstance.getInitialCards().then(data => {
-
-  //Función para renderizar las tarjetas del servidor
-  const cardsList = new Section(
-    {
-      data: data,
-      renderer: (initialCard) => {
-        const card = new Card(
-          initialCard,
-          "#card-template",
-          (evt) => {
-            const popupImage = new PopupWithImage(
-              "#popupImageTemplate",
-              "#popup__image",
-              popupImageConfig,
-              {
-                name: evt.target.alt,
-                image: evt.target.currentSrc,
-              }
-            );
-            const popup = popupImage.generatePopup();
-            popupImage.open();
-            document
-              .querySelector(popupImageConfig.popupUbication)
-              .prepend(popup);
-          },
-          (evt) => {
-            const confirmationPopup = new ConfirmationPopup(
-              "#popupConfirmationTemplate",
-              "#popup__confirmation",
-              popupConfirmationConfig,
-              () => {
-                evt.target.closest(".elements__card").remove();
-                apiInstance.deleteCard(evt.target.previousElementSibling.id)
-                confirmationPopup.close();
-              }
-            )
-            const popup = confirmationPopup.generatePopup()
-            confirmationPopup.open();
-            document
-            .querySelector(popupConfirmationConfig.popupUbication)
-            .prepend(popup);
-          }
-        );
-        const cardElement = card.generateCard();
-        cardsList.setItem(cardElement);
-      },
-    },
-    cardsListSelector
-  );
-
-  //renderizar las tarjetas iniciales
-  cardsList.renderItems();
-});
 
 //ejecuta función para obtener datos del perfil de usuario desde servidor y renderizarlos
 apiInstance.getUserInfo().then(data => {
   userInfo.setUserInfo(data);
 });
 
+//ejecuta función para obtener datos de las tarjetas desde el servidor
+renderCards()
 //ejecución de función que abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 editButtonAction();
 

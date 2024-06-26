@@ -87,7 +87,7 @@ export class Api {
       return Promise.reject(`Error: ${res.status}`);
     })
     .then((data) => {
-      console.log(data); //todo borrar
+      //console.log(data); //todo borrar
       return data;
     })
     .catch((err) => {
@@ -106,17 +106,55 @@ export class Api {
       }
       return Promise.reject(`Error: ${res.status}`)
     })
-    .then((data) => {
+   /*  .then((data) => {
       console.log(data); //todo borrar
       return data;
-    })
+    }) */
     .catch((err) => {
       console.log(err);
     });
-
-
-
   }
+
+  addLike(cardId) {
+    return fetch(`${this._baseUrl}cards/likes/${cardId}`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    })
+   /*  .then((data) => {
+      console.log(data);
+      return data;
+    }) */
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  removeLike(cardId) {
+    return fetch(`${this._baseUrl}cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    })
+    /* .then((data) => {
+      console.log(data);
+      return data;
+    }) */
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
 
   /* setUserAvatar(data) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
@@ -142,23 +180,5 @@ export class Api {
   } */
 
 
-  /*  setLikes(data) {
-    return fetch(`${this._baseUrl}cards/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((data) => {
-        console.log(data);
-        return data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  } */
+
 }
