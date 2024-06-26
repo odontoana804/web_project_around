@@ -53,49 +53,61 @@ export const popupPlace = new PopupWithForms(
   "#popup__place",
   popupWithFormConfig,
   (formData) => {
-    const card = new Card(
-      formData,
-      "#card-template",
-      (evt) => {
-        const popupImage = new PopupWithImage(
-          "#popupImageTemplate",
-          "#popup__image",
-          popupImageConfig,
-          {
-            name: evt.target.alt,
-            image: evt.target.currentSrc,
-          }
-        );
-        const popup = popupImage.generatePopup();
-        popupImage.open();
-        document.querySelector(popupImageConfig.popupUbication).prepend(popup);
-      },
-      (evt) => {
-        const confirmationPopup = new ConfirmationPopup(
-          "#popupConfirmationTemplate",
-          "#popup__confirmation",
-          popupConfirmationConfig,
-          () => {
-            evt.target.closest(".elements__card").remove();
-            /* let indiceEliminar = initialCards.findIndex(
-              (element) => element.id === evt.target.previousElementSibling.id
-            );
-            initialCards.splice(indiceEliminar, 1); */
-            confirmationPopup.close();
-          }
-        )
-        const popup = confirmationPopup.generatePopup();
-        confirmationPopup.open();
-        document
-        .querySelector(popupConfirmationConfig.popupUbication)
-        .prepend(popup);
-      }
-    );
-    /* formData.id = card._id;
-    initialCards.push(formData); */
-    const cardElement = card.generateCard();
-    cardsList.setItem(cardElement);
-    popupPlace.close();
+
+    apiInstance.addNewCard(formData)
+    .then((formData)=> {
+      const card = new Card(
+        formData,
+        "#card-template",
+        (evt) => {
+          const popupImage = new PopupWithImage(
+            "#popupImageTemplate",
+            "#popup__image",
+            popupImageConfig,
+            {
+              name: evt.target.alt,
+              image: evt.target.currentSrc,
+            }
+          );
+          const popup = popupImage.generatePopup();
+          popupImage.open();
+          document.querySelector(popupImageConfig.popupUbication).prepend(popup);
+        },
+        (evt) => {
+          const confirmationPopup = new ConfirmationPopup(
+            "#popupConfirmationTemplate",
+            "#popup__confirmation",
+            popupConfirmationConfig,
+            () => {
+              evt.target.closest(".elements__card").remove();
+
+            /*  let indiceEliminar = initialCards.findIndex(
+                (element) => element.id === evt.target.previousElementSibling.id
+              );
+              initialCards.splice(indiceEliminar, 1); */
+
+              confirmationPopup.close();
+            }
+          )
+          const popup = confirmationPopup.generatePopup();
+          confirmationPopup.open();
+          document
+          .querySelector(popupConfirmationConfig.popupUbication)
+          .prepend(popup);
+        }
+      );
+
+      /*  formData.id = card._id;
+        initialCards.push(formData); */
+
+      const cardElement = card.generateCard();
+      document.querySelector(cardsListSelector).prepend(cardElement)
+      //cardsList.setItem(cardElement);
+      //popupPlace.close();
+    })
+    .then(
+      popupPlace.close()
+    )
   }
 );
 
