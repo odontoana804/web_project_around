@@ -73,3 +73,11 @@ export const avatarValidationConfig = {
   errorClass: "avatar-popup__input-error_active",
   errorSelector: ".avatar-popup__input-error"
 };
+
+export const apiInstanceConfig = {
+  baseUrl : "https://around.nomoreparties.co/v1/web_es_11/",
+  headers: {
+    authorization: "04d1875f-c579-4568-96e2-fbf8888c1f19",
+    "Content-Type": "application/json"
+  }
+}

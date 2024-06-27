@@ -6,7 +6,8 @@ import {
   profileAvatarImage,
   popupWithFormConfig,
   popupAvatarConfig,
-  profileDescription
+  profileDescription,
+  apiInstanceConfig
 } from "./utils/constants.js";
 import {
   addButtonAction,
@@ -19,13 +20,7 @@ import {
 import { Api } from "./components/Api.js";
 
 //crea instancia de la clase Api
-export const apiInstance = new Api ({
-  baseUrl : "https://around.nomoreparties.co/v1/web_es_11/",
-  headers: {
-    authorization: "04d1875f-c579-4568-96e2-fbf8888c1f19",
-    "Content-Type": "application/json"
-  }
-});
+export const apiInstance = new Api (apiInstanceConfig);
 
 //crea instancia de la clase UserInfo
 export const userInfo = new UserInfo(profileName, profileDescription);
