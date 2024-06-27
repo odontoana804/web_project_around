@@ -1,11 +1,38 @@
 export default class Card {
-  constructor( data, cardSelector, handleCardClick, handleDeleteClick, handleLikeClick ) {
+  constructor(
+    data,
+    cardTemplateSelector,
+    cardSelector,
+    {
+      likeButtonClass,
+      likeButtonClassActive,
+      likeButtonClassSelector,
+      cardImageClass,
+      cardImageClassSelector,
+      deleteButtonClass,
+      deleteButtonClassSelector,
+      cardLikesCounterSelector,
+      cardTitleSelector,
+      userId
+    },
+    handleCardClick, handleDeleteClick, handleLikeClick ) {
     this._cardId = data._id
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._ownerId = data.owner._id;
+    this._cardTemplateSelector = cardTemplateSelector;
     this._cardSelector = cardSelector;
+    this._likeButtonClass = likeButtonClass;
+    this.likeButtonClassActive = likeButtonClassActive;
+    this._likeButtonClassSelector = likeButtonClassSelector;
+    this._cardImageClass = cardImageClass;
+    this._cardImageClassSelector = cardImageClassSelector;
+    this._deleteButtonClass = deleteButtonClass;
+    this._deleteButtonClassSelector = deleteButtonClassSelector;
+    this._cardLikesCounterSelector = cardLikesCounterSelector;
+    this._cardTitleSelector = cardTitleSelector;
+    this._userId = userId;
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
@@ -13,25 +40,22 @@ export default class Card {
 
   //función para clonar la plantilla
   _getTemplate() {
-    const newCard = document.querySelector(this._cardSelector).content.querySelector(".elements__card").cloneNode(true);
+    const newCard = document.querySelector(this._cardTemplateSelector).content.querySelector(this._cardSelector).cloneNode(true);
     return newCard;
   };
 
   _setEventListeners() {
-    this._popupImage = document.querySelector("#popup__image");
-    this._popupOverlay = document.querySelector(".overlay");
-
     this._element.addEventListener( "click", (evt) => {
       //evento para funcionalidad del boton de like
-      if (evt.target.classList.contains("elements__card-btn-hearth")) {
+      if (evt.target.classList.contains(this._likeButtonClass)) {
         this._handleLikeClick(evt)
       };
       //evento para mostrar el popUp de la visualización de la imagen
-      if (evt.target.classList.contains("elements__card-photo-imagen")){
+      if (evt.target.classList.contains(this._cardImageClass)){
         this._handleCardClick(evt);
       };
       //evento para funcionalidad del boton de eliminar
-      if (evt.target.classList.contains("elements__card-btn-trash")){
+      if (evt.target.classList.contains(this._deleteButtonClass)){
         this._handleDeleteClick(evt)
       };
     });
@@ -41,21 +65,20 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector(".elements__card-photo-imagen").src = this._link;
-    this._element.querySelector(".elements__card-photo-imagen").alt = this._name;
-    this._element.querySelector(".elements__card-likes-counter").textContent = this._likes.length;
+    this._element.querySelector(this._cardImageClassSelector).src = this._link;
+    this._element.querySelector(this._cardImageClassSelector).alt = this._name;
+    this._element.querySelector(this._cardLikesCounterSelector).textContent = this._likes.length;
     this._element.setAttribute("id", this._cardId );
-    this._element.querySelector(".elements__card-title").textContent = this._name;
-    if (this._ownerId !== "95360503a2d4a266f1fa94e5") {
-      this._element.querySelector(".elements__card-btn-trash").remove();
+    this._element.querySelector(this._cardTitleSelector).textContent = this._name;
+    if (this._ownerId !== this._userId) {
+      this._element.querySelector(this._deleteButtonClassSelector).remove();
     }
     const values = this._likes.values()
     for (const value of values) {
-      if (value._id === "95360503a2d4a266f1fa94e5") {
-        this._element.querySelector(".elements__card-btn-hearth").classList.add("elements__card-btn-hearth_active");
+      if (value._id === this._userId) {
+        this._element.querySelector(this._likeButtonClassSelector).classList.add(this.likeButtonClassActive);
       }
     }
-
     return this._element;
   };
 };

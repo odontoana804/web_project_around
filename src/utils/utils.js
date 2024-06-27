@@ -14,6 +14,7 @@ import {
   cardsListSelector,
   popupConfirmationConfig,
   popupImageConfig,
+  cardConfig,
 } from "./constants.js";
 
 //función que abre la ventana popup Profile al dar click en el icono del lápiz (editar)
@@ -73,6 +74,8 @@ export function renderCards () {
           const card = new Card(
             initialCard,
             "#card-template",
+            ".elements__card",
+            cardConfig,
             (evt) => {
               const popupImage = new PopupWithImage(
                 "#popupImageTemplate",

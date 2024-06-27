@@ -24,6 +24,19 @@ export const validationConfig = {
   errorSelector: ".popup__input-error"
 };
 
+export const cardConfig = {
+  likeButtonClass: "elements__card-btn-hearth",
+  likeButtonClassActive: "elements__card-btn-hearth_active",
+  likeButtonClassSelector: ".elements__card-btn-hearth",
+  cardImageClass: "elements__card-photo-imagen",
+  cardImageClassSelector: ".elements__card-photo-imagen",
+  deleteButtonClass: "elements__card-btn-trash",
+  deleteButtonClassSelector: ".elements__card-btn-trash",
+  cardLikesCounterSelector: ".elements__card-likes-counter",
+  cardTitleSelector: ".elements__card-title",
+  userId: "95360503a2d4a266f1fa94e5"
+}
+
 export const popupImageConfig = {
   openPopupClass: "img-popup_opened",
   openOverlayClass: "overlay_opened",
