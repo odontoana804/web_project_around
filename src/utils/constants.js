@@ -42,6 +42,7 @@ export const popupWithFormConfig = {
   popupOverlay: document.querySelector(".overlay"),
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__btn-submit",
+  inactiveButtonClass: "popup__btn-submit_inactive",
 };
 
 export const popupConfirmationConfig = {

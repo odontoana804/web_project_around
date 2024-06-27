@@ -15,12 +15,14 @@ import {
   popupConfirmationConfig,
   popupImageConfig,
 } from "./constants.js";
+
 //función que abre la ventana popup Profile al dar click en el icono del lápiz (editar)
 export const editButtonAction = () => {
   editButtonProfile.addEventListener("click", () => {
     const popup = popupProfile.generatePopup();
     popupProfile.open();
     document.querySelector(".popup").prepend(popup);
+    popup.querySelector("#name-profile").focus();
     userInfo.getUserInfo();
     new FormValidator(popup, validationConfig).enableValidation();
     popupProfile.disableConfirmButton();
@@ -33,6 +35,7 @@ export const addButtonAction = () => {
     const popup = popupPlace.generatePopup();
     popupPlace.open();
     document.querySelector(".popup").prepend(popup);
+    popup.querySelector("#name-place").focus();
     new FormValidator(popup, validationConfig).enableValidation();
   });
 };
@@ -53,6 +56,7 @@ export const editAvatarAction = () => {
     const popup = popupAvatar.generatePopup();
     popupAvatar.open();
     document.querySelector(".avatar-popup").prepend(popup);
+    popup.querySelector("#url-avatar").focus();
     new FormValidator(popup, avatarValidationConfig).enableValidation();
   });
 };
@@ -91,9 +95,14 @@ export function renderCards () {
                 "#popup__confirmation",
                 popupConfirmationConfig,
                 () => {
-                  evt.target.closest(".elements__card").remove();
                   apiInstance.deleteCard(evt.target.parentElement.parentElement.id)
-                  confirmationPopup.close();
+                  .then(() => {
+                    evt.target.closest(".elements__card").remove();
+                    confirmationPopup.close();
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
                 }
               )
               const popup = confirmationPopup.generatePopup()
@@ -101,24 +110,27 @@ export function renderCards () {
               document
               .querySelector(popupConfirmationConfig.popupUbication)
               .prepend(popup);
+              popup.querySelector(popupConfirmationConfig.submitButtonSelector).focus();
             },
             (evt) => {
               if (evt.target.classList.contains("elements__card-btn-hearth_active")) {
                 apiInstance.removeLike(evt.target.parentElement.parentElement.parentElement.id)
-                .then(
-                  evt.target.classList.toggle("elements__card-btn-hearth_active")
-                )
-                .then(
-                  evt.target.nextElementSibling.textContent = Number(evt.target.nextElementSibling.textContent) - 1
-                )
+                .then(()=>{
+                  evt.target.classList.toggle("elements__card-btn-hearth_active");
+                  evt.target.nextElementSibling.textContent = Number(evt.target.nextElementSibling.textContent) - 1;
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
               } else {
                 apiInstance.addLike(evt.target.parentElement.parentElement.parentElement.id)
-                .then(
-                  evt.target.classList.toggle("elements__card-btn-hearth_active")
-                )
-                .then(
-                  evt.target.nextElementSibling.textContent = Number(evt.target.nextElementSibling.textContent) + 1
-                )
+                .then(() => {
+                  evt.target.classList.toggle("elements__card-btn-hearth_active");
+                  evt.target.nextElementSibling.textContent = Number(evt.target.nextElementSibling.textContent) + 1;
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
               }
             }
           );
@@ -128,8 +140,11 @@ export function renderCards () {
       },
       cardsListSelector
     );
-    //renderizar las tarjetas iniciales
+    //renderizar las tarjetas
     cardsList.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
   });
 }
 

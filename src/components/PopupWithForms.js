@@ -12,6 +12,7 @@ export default class PopupWithForms extends Popup {
       popupOverlay,
       inputSelector,
       submitButtonSelector,
+      inactiveButtonClass,
     },
     handleFormSubmit
   ) {
@@ -29,6 +30,7 @@ export default class PopupWithForms extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._inputSelector = inputSelector;
     this._submitButtonSelector = submitButtonSelector;
+    this._inactiveButtonClass = inactiveButtonClass;
   }
 
   _getInputValues() {
@@ -41,14 +43,21 @@ export default class PopupWithForms extends Popup {
   }
 
   disableConfirmButton() {
-    document.querySelector(this._popupSelector).querySelector(this._submitButtonSelector).classList.add("popup__btn-submit_inactive");
+    document.querySelector(this._popupSelector).querySelector(this._submitButtonSelector).classList.add(this._inactiveButtonClass);
     document.querySelector(this._popupSelector).querySelector(this._submitButtonSelector).setAttribute("disabled", true);
   }
 
+  loadingChanges(isLoading) {
+    if (isLoading) {
+      document.querySelector(this._popupSelector).querySelector(this._submitButtonSelector).textContent = "Guardando...";
+    }
+  }
+
   _setEventListeners() {
-    super._setEventListeners()
+    super._setEventListeners();
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
+      this.loadingChanges(true);
       this._handleFormSubmit(this._getInputValues());
     })
   }

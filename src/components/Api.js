@@ -1,8 +1,7 @@
 export class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
-    this._headers = options.headers || null;
-    //this._body = options.body || null;
+    this._headers = options.headers;
   }
 
   getInitialCards() {
@@ -17,7 +16,6 @@ export class Api {
         return Promise.reject(`Error: ${res.status}`);
       })
       .then((data) => {
-        console.log(data); //todo borrar
         return data;
       })
       .catch((err) => {
@@ -30,19 +28,18 @@ export class Api {
       method: "GET",
       headers: this._headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((data) => {
-        console.log(data); //todo borrar
-        return data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    })
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   setUserInfo(data) {
@@ -55,19 +52,15 @@ export class Api {
           about: data.about,
         }),
       })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Error: ${res.status}`);
-        })
-        /* .then((data) => {
-      console.log(data); //todo borrar
-      return data;
-    }) */
-        .catch((err) => {
-          console.log(err);
-        })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     );
   }
 
@@ -87,7 +80,6 @@ export class Api {
       return Promise.reject(`Error: ${res.status}`);
     })
     .then((data) => {
-      //console.log(data); //todo borrar
       return data;
     })
     .catch((err) => {
@@ -106,10 +98,6 @@ export class Api {
       }
       return Promise.reject(`Error: ${res.status}`)
     })
-   /*  .then((data) => {
-      console.log(data); //todo borrar
-      return data;
-    }) */
     .catch((err) => {
       console.log(err);
     });
@@ -126,10 +114,6 @@ export class Api {
       }
       return Promise.reject(`Error: ${res.status}`);
     })
-   /*  .then((data) => {
-      console.log(data);
-      return data;
-    }) */
     .catch((err) => {
       console.log(err);
     });
@@ -146,17 +130,13 @@ export class Api {
       }
       return Promise.reject(`Error: ${res.status}`);
     })
-    /* .then((data) => {
-      console.log(data);
-      return data;
-    }) */
     .catch((err) => {
       console.log(err);
     });
   }
 
 
-  /* setUserAvatar(data) {
+  setUserAvatar(data) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
@@ -170,15 +150,9 @@ export class Api {
       }
       return Promise.reject(`Error: ${res.status}`);
     })
-    .then((data) => {
-      console.log(data);
-      return data;
-    })
     .catch((err) => {
       console.log(err);
     });
-  } */
-
-
+  }
 
 }
